@@ -33,11 +33,23 @@ const { elements, colored } = Astro.props
 				<div
 					class={`${index % 2 === 0 ? 'timeline-start' : 'timeline-end'} mb-10 md:text-end`}
 				>
-					<time class='font-mono italic'>{element.time}</time>
+					{/* <time class='font-mono italic'>{element.time}</time>
 					<div class='text-lg font-black'>{isExperience(element) ? element.title : element.degree}</div>
 					<div>{element.description}</div>
 					<div>{isExperience(element) ? element.company : element.school}</div>
-					<div>{element.location}</div>
+					<div>{element.location}</div> */}
+					<time class="font-mono italic">{element.time}</time>
+<div class="text-lg font-black">
+  {isExperience(element) ? element.title : element.degree}
+</div>
+
+<!-- meta nad opisem, delikatnie pogrubione -->
+<div class="text-sm font-semibold mb-2">
+  {isExperience(element) ? element.company : element.school}
+  {element.location && <span> • {element.location}</span>}
+</div>
+
+<div>{element.description}</div>
 				</div>
         <hr class:list={[{ 'bg-accent': colored }]} />
 			</li>
