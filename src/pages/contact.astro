@@ -1,0 +1,55 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { social } from "@/settings";
+import LinkedIn from "@/assets/social-icons/linkedin-in.svg";
+import GitHub from "@/assets/social-icons/github.svg";
+import Scholar from "@/assets/social-icons/google-scholar.svg";
+import Envelope from "@/assets/social-icons/envelope.svg";
+---
+
+<Layout title="Contact">
+    <section class="prose max-w-none text-center">
+    <h1 class="text-3xl font-bold mb-6">Get in Touch</h1>
+    <p class="text-lg text-base-content/80 mb-10 max-w-2xl mx-auto">
+      I’m always happy to connect — whether it’s about research, software development, or new ideas.  
+      Feel free to reach out if you’d like to collaborate, discuss something interesting, or just say hi.
+    </p>
+<div class="flex flex-wrap justify-center items-start gap-8 mt-6">
+  {social.linkedin && (
+    <div class="flex flex-col items-center w-16">
+      <a href={social.linkedin} target="_blank" class="hover:text-accent transition-colors">
+        <LinkedIn class="size-6 mb-1" fill="currentColor" />
+      </a>
+      <span class="text-sm text-base-content/80">LinkedIn</span>
+    </div>
+  )}
+
+  {social.github && (
+    <div class="flex flex-col items-center w-16">
+      <a href={social.github} target="_blank" class="hover:text-accent transition-colors">
+        <GitHub class="size-6 mb-1" fill="currentColor" />
+      </a>
+      <span class="text-sm text-base-content/80">GitHub</span>
+    </div>
+  )}
+
+  {social.scholar && (
+    <div class="flex flex-col items-center w-16">
+      <a href={social.scholar} target="_blank" class="hover:text-accent transition-colors">
+        <Scholar class="size-6 mb-1" fill="currentColor" />
+      </a>
+      <span class="text-sm text-base-content/80">Scholar</span>
+    </div>
+  )}
+
+  {social.email && (
+    <div class="flex flex-col items-center w-16">
+      <a href={`mailto:${social.email}`} class="hover:text-accent transition-colors">
+        <Envelope class="size-6 mb-1" fill="currentColor" />
+      </a>
+      <span class="text-sm text-base-content/80">Email</span>
+    </div>
+  )}
+</div>
+    </section>
+</Layout>
