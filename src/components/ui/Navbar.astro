@@ -6,7 +6,11 @@ import SocialIcons from './SocialIcons.astro'
 import { getCollection } from 'astro:content'
 import { template } from '@/settings'
 
-const isBlogPopulated = await getCollection('blog').then(collection => collection.length > 0)
+// Only touch the blog collection when the blog is enabled, otherwise an empty
+// collection logs a warning on every page render.
+const isBlogPopulated = template.enableBlog
+	? await getCollection('blog').then(collection => collection.length > 0)
+	: false
 
 const {fullName, title} = profile
 ---

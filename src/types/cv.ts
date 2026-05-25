@@ -25,7 +25,16 @@ export interface Publication {
   journal: string;
   time: string;
   link?: string;
+  repo?: string;
   abstract?: string;
+}
+
+export interface Award {
+  title: string;
+  issuer: string;
+  time: string;
+  description?: string;
+  link?: string;
 }
 
 export function isExperience(element: Experience | Education): element is Experience {

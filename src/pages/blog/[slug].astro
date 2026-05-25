@@ -4,6 +4,7 @@ import {template} from '@/settings'
 import {getCollection, render} from 'astro:content'
 
 export async function getStaticPaths(): Promise<Array<{ params: { slug: string }, props: { post: any } }>> {
+    if (!template.enableBlog) return [];
     const blogEntries = await getCollection("blog");
 
     const posts = blogEntries

@@ -24,7 +24,7 @@ const ALL_PROJECTS = projects as Project[];
   A selection of my projects that combine software development and research — 
   from academic work to personal ideas I’ve explored in my free time. 
   You can find more smaller experiments and prototypes on my 
-  <a href="https://github.com/ikolton" class="text-accent hover:underline">GitHub profile</a>.
+  <a href="https://github.com/ikolton" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">GitHub profile</a>.
 </p>
 
     <div class="space-y-8">
@@ -33,7 +33,7 @@ const ALL_PROJECTS = projects as Project[];
           <div class="card bg-base-200 hover:bg-base-300 transition-colors">
             <div class="card-body">
               <h2 class="card-title text-xl">
-                <a href={p.link || p.repo} class="hover:text-accent">
+                <a href={p.link || p.repo} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
                   {p.title}
                 </a>
               </h2>
@@ -56,6 +56,8 @@ const ALL_PROJECTS = projects as Project[];
                 {p.repo && (
                   <a
                     href={p.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="btn btn-sm btn-secondary text-secondary-content"
                   >
                     View on GitHub
@@ -64,6 +66,8 @@ const ALL_PROJECTS = projects as Project[];
                 {p.demo && (
                   <a
                     href={p.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="btn btn-sm btn-secondary text-secondary-content"
                   >
                     Live Demo

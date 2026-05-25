@@ -1,49 +1,31 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { experiences, education, skills, publications } from "../data/cv";
+import { experiences, education, skills, publications, awards } from "@/data/cv";
 import CvTimeline from "@/components/ui/CvTimeline.astro";
 
-import type { Experience, Education, Publication } from "../types/cv";
+import type { Experience, Education, Award } from "@/types/cv";
 import List from "@/components/ui/List.astro";
 import PublicationsList from "@/components/ui/PublicationsList.astro";
+import { sortByDateDesc } from "@/lib/utils";
 import { template } from "@/settings";
 
-let orderedExperiences: Experience[] = [];
-let orderedEducations: Education[] = [];
-let orderedPublications: Publication[] = [];
-
-const orderElement = <T extends { time: string }>(a: T, b: T) => {
+// Experiences/education carry a "start - end" range; order by the end date,
+// keeping anything marked present/now/current/today first. Sort on copies so
+// the shared imported arrays are never mutated.
+const orderByEndDate = <T extends { time: string }>(a: T, b: T) => {
 	const presentValues = ["present", "now", "current", "today"];
-	if (
-		presentValues.includes(
-			(a["time"] as string)?.split(" - ")[1]?.toLowerCase(),
-		)
-	) {
-		// If the date is 'present', it should be the first element
+	if (presentValues.includes(a.time?.split(" - ")[1]?.toLowerCase())) {
 		return -1;
 	}
-	const dateA = new Date((a["time"] as string)?.split(" - ")[1]);
-	const dateB = new Date((b["time"] as string)?.split(" - ")[1]);
+	const dateA = new Date(a.time?.split(" - ")[1]);
+	const dateB = new Date(b.time?.split(" - ")[1]);
 	return dateB.getTime() - dateA.getTime();
 };
 
-if (experiences.length > 0) {
-	orderedExperiences = experiences.sort((a, b) => {
-		return orderElement(a, b);
-	});
-}
-
-if (education.length > 0) {
-	orderedEducations = education.sort((a, b) => {
-		return orderElement(a, b);
-	});
-}
-
-if (publications.length > 0) {
-	orderedPublications = publications.sort((a, b) => {
-		return orderElement(a, b);
-	});
-}
+const orderedExperiences: Experience[] = [...experiences].sort(orderByEndDate);
+const orderedEducations: Education[] = [...education].sort(orderByEndDate);
+const orderedAwards: Award[] = sortByDateDesc(awards);
+const orderedPublications = sortByDateDesc(publications);
 ---
 
 <Layout>
@@ -79,6 +61,44 @@ if (publications.length > 0) {
 					Experiences
 				</h2>
 				<CvTimeline elements={orderedExperiences} colored={true} />
+			</section>
+		)
+	}
+
+	{
+		orderedAwards.length > 0 && (
+			<section class="mb-12">
+				<h2 class="text-2xl font-bold mb-6 border-b pb-2">
+					Grants & Awards
+				</h2>
+				<div class="space-y-6">
+					{orderedAwards.map((award) => (
+						<div class="card bg-base-200">
+							<div class="card-body">
+								<h3 class="card-title text-xl">
+									{award.link ? (
+										<a
+											href={award.link}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="hover:text-accent"
+										>
+											{award.title}
+										</a>
+									) : (
+										award.title
+									)}
+								</h3>
+								<p class="text-sm mb-1">
+									<span class="font-medium">{award.issuer}</span> • {award.time}
+								</p>
+								{award.description && (
+									<p class="text-sm text-base-content/80">{award.description}</p>
+								)}
+							</div>
+						</div>
+					))}
+				</div>
 			</section>
 		)
 	}

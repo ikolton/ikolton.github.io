@@ -1,16 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '@/layouts/Layout.astro'
 
-import { profile } from '@/settings'
+import { profile, template } from '@/settings'
 import { publications } from '@/data/cv'
+import { sortByDateDesc } from '@/lib/utils'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
 import Grid from '@/components/ui/Grid.astro'
 import ArticleList from '@/components/ui/ArticleList.astro'
-import { template } from '@/settings'
 
 
 const { fullName, title, institute, research_areas, development_areas } = profile
+const recentPublications = sortByDateDesc(publications).slice(0, 5)
 const researchGridItems = [
   ...research_areas,
   {
@@ -59,6 +60,6 @@ const devGridItems = [
 
 	<!-- Recent Publications -->
 	<section class='py-12 border-t'>
-		<ArticleList listTitle='Recent Publications' listItems={publications} />
+		<ArticleList listTitle='Recent Publications' listItems={recentPublications} />
 	</section>
 </Layout>

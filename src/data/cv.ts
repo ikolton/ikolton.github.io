@@ -98,3 +98,14 @@ export const publications = [
 		abstract: 'Multi-modal three-dimensional (3D) medical imaging data, derived from ultrasound, magnetic resonance imaging (MRI), and potentially computed tomography (CT), provide a widely adopted approach for non-invasive anatomical visualization. Accurate modeling, registration, and visualization in this setting depend on surface reconstruction and frame-to-frame interpolation. Traditional methods often face limitations due to image noise and incomplete information between frames. To address these challenges, we present MedGS, a semi-supervised neural implicit surface reconstruction framework that employs a Gaussian Splatting (GS)-based interpolation mechanism. In this framework, medical imaging data are represented as consecutive two-dimensional (2D) frames embedded in 3D space and modeled using Gaussian-based distributions. This representation enables robust frame interpolation and high-fidelity surface reconstruction across imaging modalities.',
 	},
 ];
+
+export const awards = [
+	{
+		title: 'ArtInCom Minigrant',
+		issuer: 'Excellence Initiative – Research University, Jagiellonian University',
+		time: '2025',
+		description:
+			'Research minigrant from the Artificial Intelligence Computing Core Facility (ArtInCom) supporting student-led research.',
+		link: 'https://artincom.id.uj.edu.pl/konkurs-na-minigranty-2025',
+	},
+];

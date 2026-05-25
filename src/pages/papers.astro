@@ -2,7 +2,6 @@
 import Layout from "@/layouts/Layout.astro";
 import { publications } from "@/data/cv";
 import { highlightAuthor } from "@/lib/utils";
-import {template} from "@/settings";
 
 const ALL_PAPERS = publications; // This will be replaced with dynamic data later
 ---
@@ -17,7 +16,7 @@ const ALL_PAPERS = publications; // This will be replaced with dynamic data late
           <div class="card bg-base-200">
             <div class="card-body">
               <h2 class="card-title text-xl">
-                <a href={template.base + paper.link} class="hover:text-accent">
+                <a href={paper.link} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
                   {paper.title}
                 </a>
               </h2>
@@ -31,11 +30,11 @@ const ALL_PAPERS = publications; // This will be replaced with dynamic data late
               <p class="text-sm text-base-content/80">{paper.abstract}</p>
               <div class="card-actions justify-end mt-4 gap-2">
                 {paper.repo && (
-                  <a href={paper.repo} class="btn btn-sm btn-secondary text-secondary-content">
+                  <a href={paper.repo} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary text-secondary-content">
                     Code
                   </a>
                 )}
-                <a href={paper.link} class="btn btn-sm btn-secondary text-secondary-content">
+                <a href={paper.link} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary text-secondary-content">
                   Read Paper
                 </a>
               </div>

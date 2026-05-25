@@ -6,13 +6,14 @@ import { template } from '@/settings'
 import { getCollection } from 'astro:content'
 
 export async function getStaticPaths({ paginate }): Promise<Astro.getStaticPathsResult> {
+    if (!template.enableBlog) return [];
     const blogEntries = await getCollection("blog");
 
     const posts = blogEntries
         .map(post => ({
             title: post.data.title,
             date: post.data.date,
-            badge: post.data.tags[0],
+            badge: post.data.tags?.[0],
             excerpt: trimExcerpt(post.data.excerpt),
             slug: `${template.base}/blog/${post.id}`,
         }))

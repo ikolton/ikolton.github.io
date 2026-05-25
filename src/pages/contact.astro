@@ -17,7 +17,7 @@ import Envelope from "@/assets/social-icons/envelope.svg";
 <div class="flex flex-wrap justify-center items-start gap-8 mt-6">
   {social.linkedin && (
     <div class="flex flex-col items-center w-16">
-      <a href={social.linkedin} target="_blank" class="hover:text-accent transition-colors">
+      <a href={social.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
         <LinkedIn class="size-6 mb-1" fill="currentColor" />
       </a>
       <span class="text-sm text-base-content/80">LinkedIn</span>
@@ -26,7 +26,7 @@ import Envelope from "@/assets/social-icons/envelope.svg";
 
   {social.github && (
     <div class="flex flex-col items-center w-16">
-      <a href={social.github} target="_blank" class="hover:text-accent transition-colors">
+      <a href={social.github} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
         <GitHub class="size-6 mb-1" fill="currentColor" />
       </a>
       <span class="text-sm text-base-content/80">GitHub</span>
@@ -35,7 +35,7 @@ import Envelope from "@/assets/social-icons/envelope.svg";
 
   {social.scholar && (
     <div class="flex flex-col items-center w-16">
-      <a href={social.scholar} target="_blank" class="hover:text-accent transition-colors">
+      <a href={social.scholar} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors">
         <Scholar class="size-6 mb-1" fill="currentColor" />
       </a>
       <span class="text-sm text-base-content/80">Scholar</span>

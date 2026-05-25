@@ -1,11 +1,17 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { profile } from "@/settings";
+import { profile, template } from "@/settings";
 import BetterIcon from "@/components/ui/BetterIcon.astro";
-import List from "@/components/ui/List.astro";
+import PublicationsList from "@/components/ui/PublicationsList.astro";
+import { publications } from "@/data/cv";
+import { sortByDateDesc } from "@/lib/utils";
 import {RESEARCH_ICONS} from "@/data/researchIcons";
 
 const { research_areas } = profile;
+
+// Auto-populate with the latest publications from src/data/cv.ts (up to 5),
+// newest first. Add new entries to `publications` and they show up here.
+const latestPublications = sortByDateDesc(publications).slice(0, 5);
 ---
 
 <Layout title="Research">
@@ -47,16 +53,21 @@ const { research_areas } = profile;
       }
     </div>
 
-    <List listTitle="Current Projects" listItems={[
-      {
-        title: "Efficient Sequential Modeling with Mixture of Experts for Medical Image Segmentation",
-        description: "Designing and evaluating a new network architecture that combines transformers or state-space models with mixture-of-experts mechanisms for 2D and 3D medical image segmentation using open public datasets."
-    },
-      {
-        title: "Adversarial Attacks on Image Generation Models using RLVR LLMs",
-        description: "Exploring the use of Reainforcement Learning with verifiable rewards (RLVR) large language models (LLMs) to generate adversarial prompts to see if unlearned models can be exploited to generate forgotten content."
-      }
-    ]} />
+    {
+      latestPublications.length > 0 && (
+        <section class="not-prose mb-12">
+          <h2 class="text-2xl font-bold mb-6">
+            <a
+              href={`${template.base}/papers`}
+              class="hover:text-accent transition-colors"
+            >
+              Latest Publications
+            </a>
+          </h2>
+          <PublicationsList elements={latestPublications} />
+        </section>
+      )
+    }
 
     <!-- <h2 class="text-2xl font-bold mb-6">Research Impact</h2>
     <p class="text-lg mb-6">

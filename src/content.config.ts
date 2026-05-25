@@ -4,12 +4,17 @@ import { defineCollection, z } from "astro:content";
 // 2. Import loader(s)
 import { glob } from "astro/loaders";
 
+import { template } from "./settings";
+
 // 3. Define your collection(s)
 const blog = defineCollection({
-    loader: glob({
-        pattern: "**/*.md",
-        base: "./src/content/BlogPosts",
-    }),
+    // The collection stays registered (so `getCollection('blog')` keeps its
+    // types) but while the blog is disabled we use a silent no-op loader, so
+    // the empty BlogPosts directory doesn't log a warning on every build.
+    // To re-enable: set template.enableBlog = true and add .md posts.
+    loader: template.enableBlog
+        ? glob({ pattern: "**/*.md", base: "./src/content/BlogPosts" })
+        : { name: "blog-disabled", load: async () => {} },
     schema: z.object({
         title: z.string(),
         date: z.string(),

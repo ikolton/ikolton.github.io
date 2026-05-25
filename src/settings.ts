@@ -4,16 +4,16 @@ export const profile = {
 	institute: 'Jagiellonian University',
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
 	research_areas: [
-		{ title: 'Computer Vision', description: 'My (work in progress) master thesis is connected to medical data segmentation', field: 'machine-learning' },
+		// { title: 'Computer Vision', description: 'My (work in progress) master thesis is connected to medical data segmentation', field: 'machine-learning' },
+		{ 
+		title: 'Medical Data Analysis', 
+		description: 'Applying machine learning methods to analyze and process multimodal medical data for diagnostic and research purposes', 
+		field: 'machine-learning' 
+		},
 		{ 
 		title: 'Gaussian Splatting', 
 		description: 'Used Gaussian Splatting for representing medical volumetric data, interpolation, and 3D mesh reconstruction', 
 		field: 'computer-vision' 
-		},
-		{ 
-		title: 'Medical Data Analysis', 
-		description: 'Applying machine learning methods to analyze and process medical data for diagnostic and research purposes', 
-		field: 'machine-learning' 
 		},
 		{ 
 		title: 'Adversarial Attacks with Reinforcement Learning', 
@@ -45,7 +45,7 @@ export const profile = {
 
 // Set equal to an empty string to hide the icon that you don't want to display
 export const social = {
-	email: 'contact[at]ikolton.com',
+	email: 'contact@ikolton.com',
 	linkedin: 'https://www.linkedin.com/in/ignacy-kolton/',
 	// x: 'https://www.x.com/',
 	github: 'https://github.com/ikolton',
@@ -64,11 +64,12 @@ export const template = {
 	darkTheme: 'coffee', // Select one of the Daisy UI Themes or create your own
 	excerptLength: 200,
 	postPerPage: 5,
-    base: '' // Repository name starting with /
+    base: '', // Repository name starting with /
+    enableBlog: false, // Flip to true once src/content/BlogPosts has posts
 }
 
 export const seo = {
-	default_title: 'Ignacy Koltom',
+	default_title: 'Ignacy Kolton',
 	default_description: 'Personal website of Ignacy Kolton, MS student in Computer Science at Jagiellonian University.',
 	default_image: '/images/favicon.ico',
 }
