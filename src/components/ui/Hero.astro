@@ -1,28 +1,25 @@
 ---
 import { Image } from 'astro:assets'
-
 import SocialIcons from './SocialIcons.astro'
 
-
-const {fullName, title, institute, profilePicture} = Astro.props
+const { fullName, title, institute, profilePicture } = Astro.props
 ---
-<div class='flex-1'>
-  <h1 class='text-4xl font-bold mb-4'>
-    Welcome! I'm <span class="text-warning font-extrabold">{fullName}</span>
-  </h1>
-  <p class='text-xl text-base-content/70 mb-4'>{title}{institute ? ` at ${institute}` : ''}</p>
-  <p class='text-lg mb-6'>
-    I'm a Computer Science MS student who enjoys learning, building, and exploring. I’m curious about how machine learning can help in medical imaging, but I also love software engineering and trying out new project ideas.
-  </p>
-  <div class='flex gap-4'>
-    <SocialIcons />
-  </div>
-</div>
-<div class='size-72 lg:block hidden'>
-  <!-- Add your profile image -->
-  <Image
-    src={profilePicture}
-    alt={fullName}
-    class='w-full h-full mask mask-circle size-44'
-  />
+
+<div class="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+	<div class="max-w-xl">
+		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-300">
+			{title}{institute ? ` · ${institute}` : ''}
+		</p>
+		<h1 class="mb-4 text-2xl font-semibold leading-snug text-neutral-900 dark:text-neutral-50">
+			{fullName} — PhD student in Computer Science, working on machine learning, computer vision, and generative models, with applications ranging from medical imaging to AI safety.
+		</h1>
+		<div class="mt-6">
+			<SocialIcons />
+		</div>
+	</div>
+	<Image
+		src={profilePicture}
+		alt={fullName}
+		class="hidden size-40 rounded-full object-cover lg:block"
+	/>
 </div>
