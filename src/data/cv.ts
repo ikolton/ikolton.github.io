@@ -26,10 +26,17 @@ export const education = [
 	},
 	{
 		school: 'Jagiellonian University',
-		time: '2024 - 2026(expected)',
+		time: '2024 - 2026',
 		degree: 'Master’s in Computer Science',
 		location: 'Krakow, Poland',
 		description: 'Focused on machine learning and computer vision, with involvement in practical research projects and publications. Continued developing programming skills, including low-level languages such as assembler.',
+	},
+	{
+		school: 'Jagiellonian University',
+		time: '2026 - present',
+		degree: 'PhD in Technical Computer Science',
+		location: 'Krakow, Poland',
+		description: 'Doctoral School of Exact and Natural Sciences, focused on deep learning, computer vision, and medical imaging.',
 	},
 	// {
 	// 	school: 'University of Paris',

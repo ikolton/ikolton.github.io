@@ -9,39 +9,26 @@ import Hero from '@/components/ui/Hero.astro'
 import Grid from '@/components/ui/Grid.astro'
 import ArticleList from '@/components/ui/ArticleList.astro'
 
-const { fullName, title, institute, research_areas, development_areas } = profile
+const { fullName, title, secondaryTitle, institute, research_areas } = profile
 const recentPublications = sortByDateDesc(publications).slice(0, 5)
 
 const researchGridItems = [
   ...research_areas,
   {
     title: 'More',
-    description: 'Learn more about my research and current focus.',
-    link: `${template.base}/research`,
-  },
-]
-
-const devGridItems = [
-  ...development_areas,
-  {
-    title: 'More',
-    description: 'See my full CV for technical details and experience.',
-    link: `${template.base}/cv`,
+    description: 'See the full list of publications.',
+    link: `${template.base}/publications`,
   },
 ]
 ---
 
 <Layout>
 	<section class="border-b border-neutral-200 pb-12 dark:border-neutral-800">
-		<Hero fullName={fullName} title={title} institute={institute} profilePicture={ProfilePictures} />
+		<Hero fullName={fullName} title={title} secondaryTitle={secondaryTitle} institute={institute} profilePicture={ProfilePictures} />
 	</section>
 
 	<section class="border-b border-neutral-200 py-12 dark:border-neutral-800">
 		<Grid gridTitle="Research Areas" gridItems={researchGridItems} />
-	</section>
-
-	<section class="border-b border-neutral-200 py-12 dark:border-neutral-800">
-		<Grid gridTitle="Software Development" gridItems={devGridItems} />
 	</section>
 
 	<section class="py-12">

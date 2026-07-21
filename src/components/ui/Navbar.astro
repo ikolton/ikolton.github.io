@@ -10,7 +10,6 @@ const isBlogPopulated = template.enableBlog
 
 const navItems = [
 	{ href: `${template.base}/`, label: 'Home' },
-	{ href: `${template.base}/research`, label: 'Research' },
 	{ href: `${template.base}/publications`, label: 'Publications' },
 	{ href: `${template.base}/cv`, label: 'CV' },
 	...(isBlogPopulated ? [{ href: `${template.base}/blog/1`, label: 'Blog' }] : []),

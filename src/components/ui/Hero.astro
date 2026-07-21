@@ -2,16 +2,18 @@
 import { Image } from 'astro:assets'
 import SocialIcons from './SocialIcons.astro'
 
-const { fullName, title, institute, profilePicture } = Astro.props
+const { fullName, title, secondaryTitle, institute, profilePicture } = Astro.props
+
+const tags = [title, secondaryTitle, institute].filter(Boolean)
 ---
 
 <div class="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
 	<div class="max-w-xl">
 		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-300">
-			{title}{institute ? ` · ${institute}` : ''}
+			{tags.join(' · ')}
 		</p>
-		<h1 class="mb-4 text-2xl font-semibold leading-snug text-neutral-900 dark:text-neutral-50">
-			{fullName} — PhD student in Computer Science, working on machine learning, computer vision, and generative models, with applications ranging from medical imaging to AI safety.
+		<h1 class="mb-4 text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+			{fullName}
 		</h1>
 		<div class="mt-6">
 			<SocialIcons />
