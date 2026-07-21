@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { profile, template } from "@/settings";
 import BetterIcon from "@/components/ui/BetterIcon.astro";
 import PublicationsList from "@/components/ui/PublicationsList.astro";
-import { publications } from "@/data/cv";
+import { publications } from "@/data/publications";
 import { sortByDateDesc } from "@/lib/utils";
 import {RESEARCH_ICONS} from "@/data/researchIcons";
 
@@ -58,7 +58,7 @@ const latestPublications = sortByDateDesc(publications).slice(0, 5);
         <section class="not-prose mb-12">
           <h2 class="text-2xl font-bold mb-6">
             <a
-              href={`${template.base}/papers`}
+              href={`${template.base}/publications`}
               class="hover:text-accent transition-colors"
             >
               Latest Publications

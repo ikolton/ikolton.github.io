@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { experiences, education, skills, publications, awards } from "@/data/cv";
+import { experiences, education, skills, awards } from "@/data/cv";
+import { publications } from "@/data/publications";
 import CvTimeline from "@/components/ui/CvTimeline.astro";
 
 import type { Experience, Education, Award } from "@/types/cv";
@@ -124,7 +125,7 @@ const orderedPublications = sortByDateDesc(publications);
 			<section class="mb-12">
 				<h2 class="text-2xl font-bold mb-6 border-b pb-2">
 					<a
-						href={`${template.base}/papers`}
+						href={`${template.base}/publications`}
 						class="hover:text-accent transition-colors"
 					>
 						Last publications
