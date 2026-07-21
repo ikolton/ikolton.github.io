@@ -19,8 +19,10 @@
     "theme-change": "^3.0.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@tailwindcss/typography": "^0.5.16",
     "tsx": "^4.23.1",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.10"
   }
 }
