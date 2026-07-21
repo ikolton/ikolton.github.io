@@ -21,14 +21,14 @@ const calculatedContainerSize = activeSocial.length <= 5 ? 'size-12' : activeSoc
 
 	<!-- Linkedin -->
 	{social.linkedin !== '' &&
-		<a href={social.linkedin} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
+		<a href={social.linkedin} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-emerald-300`}>
 			<LinkedIn class={calculatedIconSize} fill="currentColor" />
 		</a>
 	}
 
 	<!-- GitHub -->
 	{social.github !== '' &&
-		<a href={social.github} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
+		<a href={social.github} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-emerald-300`}>
 			<GitHub class={calculatedIconSize} fill="currentColor" />
 		</a>
 	}
@@ -51,7 +51,7 @@ const calculatedContainerSize = activeSocial.length <= 5 ? 'size-12' : activeSoc
 
 	<!-- Google Scholar -->
 	{social.scholar !== '' &&
-		<a href={social.scholar} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
+		<a href={social.scholar} target="_blank" rel="noopener noreferrer" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-emerald-300`}>
 			<Scholar class={calculatedIconSize} fill="currentColor" />
 		</a>
 	}
@@ -78,7 +78,7 @@ const calculatedContainerSize = activeSocial.length <= 5 ? 'size-12' : activeSoc
 
 	<!-- Email -->
 	{social.email !== '' &&
-		<a href={`mailto:${social.email}`}  class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
+		<a href={`mailto:${social.email}`}  class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-emerald-600 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-emerald-300`}>
 			<Envelope class={calculatedIconSize} fill="currentColor" />
 		</a>
 	}
