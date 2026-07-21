@@ -17,8 +17,8 @@ const ALL_PROJECTS = projects as Project[];
 ---
 
 <Layout title="Projects">
-  <div class="prose max-w-none">
-    <h1 class="text-3xl font-bold mb-8">Projects</h1>
+  <div>
+    <h1 class="text-3xl font-bold mb-8 text-neutral-900 dark:text-neutral-50">Projects</h1>
 
 <p class="text-lg mb-10 text-neutral-600 dark:text-neutral-400">
   A selection of my projects that combine software development and research —
@@ -32,13 +32,13 @@ const ALL_PROJECTS = projects as Project[];
         ALL_PROJECTS.map((p) => (
           <div class="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
             <div>
-              <h2 class="text-xl font-semibold">
+              <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-50">
                 <a href={p.link || p.repo} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-300">
                   {p.title}
                 </a>
               </h2>
 
-              <p class="text-base mb-3">{p.description}</p>
+              <p class="text-base mb-3 text-neutral-600 dark:text-neutral-400">{p.description}</p>
 
               {p.stack && (
                 <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
