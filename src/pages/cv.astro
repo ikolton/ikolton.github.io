@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { experiences, education, skills, publications, awards } from "@/data/cv";
+import { experiences, education, skills, awards } from "@/data/cv";
+import { publications } from "@/data/publications";
 import CvTimeline from "@/components/ui/CvTimeline.astro";
 
 import type { Experience, Education, Award } from "@/types/cv";
@@ -28,110 +29,69 @@ const orderedAwards: Award[] = sortByDateDesc(awards);
 const orderedPublications = sortByDateDesc(publications);
 ---
 
-<Layout>
-	<!-- about me  -->
+<Layout title="CV">
 	<section class="mb-12">
-		<h2 class="text-2xl font-bold mb-6 border-b pb-2">About Me</h2>
-		<p class="text-lg text-base-content/80 leading-relaxed">
-			I’m a Computer Science student at the Jagiellonian University,
-			currently pursuing my master’s degree. My main interests focus on
-			machine learning and computer vision, especially their applications
-			in medical imaging and data analysis. At the same time, I’m
-			passionate about software engineering — I enjoy low-level
-			programming in C++, designing systems and architectures, and
-			creating practical tools that actually solve problems. I like
-			understanding how things work and turning ideas into something real
-			and useful.
+		<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">About Me</h2>
+		<p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
+			I'm a PhD student in Computer Science at Jagiellonian University, working on machine learning, computer vision, and generative models, with applications ranging from medical imaging to AI safety. My PhD focuses on medical imaging. I'm also passionate about software engineering — I enjoy low-level programming in C++, designing systems and architectures, and building practical tools that solve real problems.
 		</p>
 	</section>
 
-	{
-		orderedEducations.length > 0 && (
-			<section class="mb-12">
-				<h2 class="text-2xl font-bold mb-6 border-b pb-2">Education</h2>
-				<CvTimeline elements={orderedEducations} colored={true} />
-			</section>
-		)
-	}
+	{orderedEducations.length > 0 && (
+		<section class="mb-12">
+			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Education</h2>
+			<CvTimeline elements={orderedEducations} />
+		</section>
+	)}
 
-	{
-		orderedExperiences.length > 0 && (
-			<section class="mb-12">
-				<h2 class="text-2xl font-bold mb-6 border-b pb-2">
-					Experiences
-				</h2>
-				<CvTimeline elements={orderedExperiences} colored={true} />
-			</section>
-		)
-	}
+	{orderedExperiences.length > 0 && (
+		<section class="mb-12">
+			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Experience</h2>
+			<CvTimeline elements={orderedExperiences} />
+		</section>
+	)}
 
-	{
-		orderedAwards.length > 0 && (
-			<section class="mb-12">
-				<h2 class="text-2xl font-bold mb-6 border-b pb-2">
-					Grants & Awards
-				</h2>
-				<div class="space-y-6">
-					{orderedAwards.map((award) => (
-						<div class="card bg-base-200">
-							<div class="card-body">
-								<h3 class="card-title text-xl">
-									{award.link ? (
-										<a
-											href={award.link}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="hover:text-accent"
-										>
-											{award.title}
-										</a>
-									) : (
-										award.title
-									)}
-								</h3>
-								<p class="text-sm mb-1">
-									<span class="font-medium">{award.issuer}</span> • {award.time}
-								</p>
-								{award.description && (
-									<p class="text-sm text-base-content/80">{award.description}</p>
-								)}
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-		)
-	}
+	{orderedAwards.length > 0 && (
+		<section class="mb-12">
+			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Grants & Awards</h2>
+			<div class="space-y-6">
+				{orderedAwards.map((award) => (
+					<div class="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
+						<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-50">
+							{award.link ? (
+								<a href={award.link} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-300">
+									{award.title}
+								</a>
+							) : (
+								award.title
+							)}
+						</h3>
+						<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+							{award.issuer} · {award.time}
+						</p>
+						{award.description && (
+							<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{award.description}</p>
+						)}
+					</div>
+				))}
+			</div>
+		</section>
+	)}
 
-	{
-		skills.length > 0 && (
-			<section class="mb-12">
-				<List listTitle="Skills" listItems={skills} />
-			</section>
-		)
-	}
+	{skills.length > 0 && (
+		<section class="mb-12">
+			<List listTitle="Skills" listItems={skills} />
+		</section>
+	)}
 
-	{
-		// orderedPublications.length > 0 && (
-		// 	<section class='mb-12'>
-		// 		<h2 class='text-2xl font-bold mb-6 border-b pb-2'>
-		// 			Last publications
-		// 		</h2>
-		// 		<PublicationsList elements={orderedPublications}/>
-		// 	</section>
-		// )
-		orderedPublications.length > 0 && (
-			<section class="mb-12">
-				<h2 class="text-2xl font-bold mb-6 border-b pb-2">
-					<a
-						href={`${template.base}/papers`}
-						class="hover:text-accent transition-colors"
-					>
-						Last publications
-					</a>
-				</h2>
-				<PublicationsList elements={orderedPublications} />
-			</section>
-		)
-	}
+	{orderedPublications.length > 0 && (
+		<section class="mb-12">
+			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">
+				<a href={`${template.base}/publications`} class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors">
+					Publications
+				</a>
+			</h2>
+			<PublicationsList elements={orderedPublications} />
+		</section>
+	)}
 </Layout>

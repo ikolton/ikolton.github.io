@@ -3,75 +3,46 @@ import Layout from "@/layouts/Layout.astro";
 import { profile, template } from "@/settings";
 import BetterIcon from "@/components/ui/BetterIcon.astro";
 import PublicationsList from "@/components/ui/PublicationsList.astro";
-import { publications } from "@/data/cv";
+import { publications } from "@/data/publications";
 import { sortByDateDesc } from "@/lib/utils";
-import {RESEARCH_ICONS} from "@/data/researchIcons";
+import { RESEARCH_ICONS } from "@/data/researchIcons";
 
 const { research_areas } = profile;
-
-// Auto-populate with the latest publications from src/data/cv.ts (up to 5),
-// newest first. Add new entries to `publications` and they show up here.
 const latestPublications = sortByDateDesc(publications).slice(0, 5);
 ---
 
 <Layout title="Research">
-  <div class="prose max-w-none">
-    <h1 class="text-3xl font-bold mb-8">Research Statement</h1>
+  <h1 class="mb-8 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">Research</h1>
 
-    <div class="mb-12">
-      <p class="text-lg mb-6">
-        My research focuses on machine learning, with a particular interest in medical data analysis and related applications. I enjoy exploring different aspects of ML — from computer vision techniques for image segmentation to novel data representations like Gaussian Splatting for 3D reconstruction.
-      </p>
-    </div>
+  <p class="mb-12 text-base text-neutral-700 dark:text-neutral-300">
+    My PhD focuses on applying machine learning and computer vision to medical imaging — using techniques like Gaussian Splatting for 3D reconstruction and multimodal data representation. I'm also interested in generative models and AI safety, including how reinforcement learning can be used to probe and red-team unlearning in diffusion models.
+  </p>
 
-    <h2 class="text-2xl font-bold mb-6">Research Areas</h2>
-    <div class="grid gap-8 mb-12">
-      {
-        research_areas.map((area) => (
-          <div class="flex gap-6 items-center">
-            <BetterIcon>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke-width="2"
-                class="size-6 stroke-accent"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d={RESEARCH_ICONS[area.field as keyof typeof RESEARCH_ICONS]?.path || RESEARCH_ICONS['computer-science'].path}
-                />
-              </svg>
-            </BetterIcon>
-            <div>
-              <h3 class="text-xl font-semibold mb-2">{area.title}</h3>
-              <p class="text-base">{area.description}</p>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-
-    {
-      latestPublications.length > 0 && (
-        <section class="not-prose mb-12">
-          <h2 class="text-2xl font-bold mb-6">
-            <a
-              href={`${template.base}/papers`}
-              class="hover:text-accent transition-colors"
-            >
-              Latest Publications
-            </a>
-          </h2>
-          <PublicationsList elements={latestPublications} />
-        </section>
-      )
-    }
-
-    <!-- <h2 class="text-2xl font-bold mb-6">Research Impact</h2>
-    <p class="text-lg mb-6">
-      My research has opened new frontiers in radioactivity studies, leading to practical applications in both scientific research and medical treatments. The discoveries have revolutionized our understanding of atomic structure and radioactive decay processes.
-    </p> -->
+  <h2 class="mb-6 text-lg font-semibold text-neutral-900 dark:text-neutral-50">Research Areas</h2>
+  <div class="mb-12 grid gap-8">
+    {research_areas.map((area) => (
+      <div class="flex gap-5 items-start">
+        <BetterIcon>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" class="size-5 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" d={RESEARCH_ICONS[area.field as keyof typeof RESEARCH_ICONS]?.path || RESEARCH_ICONS['computer-science'].path} />
+          </svg>
+        </BetterIcon>
+        <div>
+          <h3 class="mb-1 text-base font-semibold text-neutral-900 dark:text-neutral-50">{area.title}</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">{area.description}</p>
+        </div>
+      </div>
+    ))}
   </div>
+
+  {latestPublications.length > 0 && (
+    <section class="mb-12">
+      <h2 class="mb-6 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
+        <a href={`${template.base}/publications`} class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors">
+          Latest Publications
+        </a>
+      </h2>
+      <PublicationsList elements={latestPublications} />
+    </section>
+  )}
 </Layout>

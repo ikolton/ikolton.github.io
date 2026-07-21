@@ -1,26 +1,25 @@
 export const profile = {
 	fullName: 'Ignacy Kolton',
-	title: 'MS student in Computer Science',
+	title: 'PhD student in Computer Science',
 	institute: 'Jagiellonian University',
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
+	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
 	research_areas: [
-		// { title: 'Computer Vision', description: 'My (work in progress) master thesis is connected to medical data segmentation', field: 'machine-learning' },
-		{ 
-		title: 'Medical Data Analysis', 
-		description: 'Applying machine learning methods to analyze and process multimodal medical data for diagnostic and research purposes', 
-		field: 'machine-learning' 
+		{
+			title: 'Medical Imaging',
+			description: 'Primary PhD focus: applying machine learning and computer vision to multimodal medical data for diagnostic and research purposes.',
+			field: 'machine-learning'
 		},
-		{ 
-		title: 'Gaussian Splatting', 
-		description: 'Used Gaussian Splatting for representing medical volumetric data, interpolation, and 3D mesh reconstruction', 
-		field: 'computer-vision' 
+		{
+			title: 'Computer Vision & Generative Models',
+			description: 'Includes Gaussian Splatting for representing medical volumetric data, interpolation, and 3D mesh reconstruction.',
+			field: 'computer-vision'
 		},
-		{ 
-		title: 'Adversarial Attacks with Reinforcement Learning', 
-		description: 'Exploring the use of LLMs and RL to generate adversarial prompts for image generation models', 
-		field: 'machine-learning' 
+		{
+			title: 'AI Safety',
+			description: 'Exploring the use of LLMs and reinforcement learning to generate adversarial prompts for image generation models, in the context of unlearning and red-teaming.',
+			field: 'machine-learning'
 		},
-
 	],
 	development_areas: [
 	{ 
@@ -60,8 +59,6 @@ export const template = {
 	website_url: 'https://ikolton.github.io', // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
 	menu_left: false,
 	transitions: true,
-	lightTheme: 'retro', // Select one of the Daisy UI Themes or create your own
-	darkTheme: 'coffee', // Select one of the Daisy UI Themes or create your own
 	excerptLength: 200,
 	postPerPage: 5,
     base: '', // Repository name starting with /
@@ -70,6 +67,6 @@ export const template = {
 
 export const seo = {
 	default_title: 'Ignacy Kolton',
-	default_description: 'Personal website of Ignacy Kolton, MS student in Computer Science at Jagiellonian University.',
+	default_description: 'Personal website of Ignacy Kolton, PhD student in Computer Science at Jagiellonian University.',
 	default_image: '/images/favicon.ico',
 }

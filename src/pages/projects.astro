@@ -17,48 +17,48 @@ const ALL_PROJECTS = projects as Project[];
 ---
 
 <Layout title="Projects">
-  <div class="prose max-w-none">
-    <h1 class="text-3xl font-bold mb-8">Projects</h1>
+  <div>
+    <h1 class="text-3xl font-bold mb-8 text-neutral-900 dark:text-neutral-50">Projects</h1>
 
-<p class="text-lg mb-10 text-base-content/80">
-  A selection of my projects that combine software development and research — 
-  from academic work to personal ideas I’ve explored in my free time. 
-  You can find more smaller experiments and prototypes on my 
-  <a href="https://github.com/ikolton" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">GitHub profile</a>.
+<p class="text-lg mb-10 text-neutral-600 dark:text-neutral-400">
+  A selection of my projects that combine software development and research —
+  from academic work to personal ideas I’ve explored in my free time.
+  You can find more smaller experiments and prototypes on my
+  <a href="https://github.com/ikolton" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-300 hover:underline">GitHub profile</a>.
 </p>
 
     <div class="space-y-8">
       {
         ALL_PROJECTS.map((p) => (
-          <div class="card bg-base-200 hover:bg-base-300 transition-colors">
-            <div class="card-body">
-              <h2 class="card-title text-xl">
-                <a href={p.link || p.repo} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
+          <div class="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
+            <div>
+              <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-50">
+                <a href={p.link || p.repo} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-300">
                   {p.title}
                 </a>
               </h2>
 
-              <p class="text-base mb-3">{p.description}</p>
+              <p class="text-base mb-3 text-neutral-600 dark:text-neutral-400">{p.description}</p>
 
               {p.stack && (
-                <p class="text-sm text-base-content/70 mb-2">
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">
                   <span class="font-medium">Tech Stack:</span> {p.stack}
                 </p>
               )}
 
               {p.time && (
-                <p class="text-sm italic text-base-content/60 mb-2">
+                <p class="text-sm italic text-neutral-600 dark:text-neutral-400 mb-2">
                   {p.time}
                 </p>
               )}
 
-              <div class="card-actions justify-end mt-4 gap-2">
+              <div class="flex justify-end mt-4 gap-2">
                 {p.repo && (
                   <a
                     href={p.repo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="btn btn-sm btn-secondary text-secondary-content"
+                    class="rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:border-emerald-400 hover:text-emerald-600 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-emerald-500 dark:hover:text-emerald-300"
                   >
                     View on GitHub
                   </a>
@@ -68,7 +68,7 @@ const ALL_PROJECTS = projects as Project[];
                     href={p.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="btn btn-sm btn-secondary text-secondary-content"
+                    class="rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:border-emerald-400 hover:text-emerald-600 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-emerald-500 dark:hover:text-emerald-300"
                   >
                     Live Demo
                   </a>

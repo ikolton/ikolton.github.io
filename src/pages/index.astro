@@ -2,21 +2,21 @@
 import Layout from '@/layouts/Layout.astro'
 
 import { profile, template } from '@/settings'
-import { publications } from '@/data/cv'
+import { publications } from '@/data/publications'
 import { sortByDateDesc } from '@/lib/utils'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
 import Grid from '@/components/ui/Grid.astro'
 import ArticleList from '@/components/ui/ArticleList.astro'
 
-
 const { fullName, title, institute, research_areas, development_areas } = profile
 const recentPublications = sortByDateDesc(publications).slice(0, 5)
+
 const researchGridItems = [
   ...research_areas,
   {
     title: 'More',
-    description: `Learn more about my research and current projects.`,
+    description: 'Learn more about my research and current focus.',
     link: `${template.base}/research`,
   },
 ]
@@ -25,41 +25,26 @@ const devGridItems = [
   ...development_areas,
   {
     title: 'More',
-    description: `See my full CV for technical details and experience.`,
+    description: 'See my full CV for technical details and experience.',
     link: `${template.base}/cv`,
   },
 ]
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-
 <Layout>
-	<!-- Hero Section -->
-	<section class='flex items-center gap-12 border-b pb-12'>
-		<Hero
-			fullName={fullName}
-			title={title}
-			institute={institute}
-			profilePicture={ProfilePictures}
-		/>
+	<section class="border-b border-neutral-200 pb-12 dark:border-neutral-800">
+		<Hero fullName={fullName} title={title} institute={institute} profilePicture={ProfilePictures} />
 	</section>
 
-	<!-- Research Areas -->
-	<section class='py-12 border-b'>
-		<!-- <Grid gridTitle='Research Areas' gridItems={research_areas} /> -->
-		<Grid gridTitle='Research Areas' gridItems={researchGridItems} />
+	<section class="border-b border-neutral-200 py-12 dark:border-neutral-800">
+		<Grid gridTitle="Research Areas" gridItems={researchGridItems} />
 	</section>
 
-	<!-- Development Areas -->
-	<section class='py-12 border-b'>
-		<!-- <Grid gridTitle='Software Development' gridItems={development_areas} /> -->
-		<Grid gridTitle='Software Development' gridItems={devGridItems} />
+	<section class="border-b border-neutral-200 py-12 dark:border-neutral-800">
+		<Grid gridTitle="Software Development" gridItems={devGridItems} />
 	</section>
 
-	<!-- Recent Publications -->
-	<section class='py-12 border-t'>
-		<ArticleList listTitle='Recent Publications' listItems={recentPublications} />
+	<section class="py-12">
+		<ArticleList listTitle="Recent Publications" listItems={recentPublications} />
 	</section>
 </Layout>
