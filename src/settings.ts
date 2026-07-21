@@ -3,6 +3,7 @@ export const profile = {
 	title: 'MS student in Computer Science',
 	institute: 'Jagiellonian University',
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
+	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
 	research_areas: [
 		// { title: 'Computer Vision', description: 'My (work in progress) master thesis is connected to medical data segmentation', field: 'machine-learning' },
 		{ 
