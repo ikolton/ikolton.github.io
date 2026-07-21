@@ -47,25 +47,16 @@ const { title, description, image } = Astro.props
 <meta property='twitter:description' content={description} />
 <meta property='twitter:image' content={new URL(image, Astro.url)} />
 
-<!-- Theme selector scripts -->
-<script is:inline define:vars={{ defaultTheme: template.lightTheme }}>
-  // Get stored theme or fall back to the configured light theme
-  const getStoredTheme = () => localStorage.getItem('theme') || defaultTheme;
-
-  // Apply theme immediately to prevent flash
-  document.documentElement.setAttribute('data-theme', getStoredTheme());
-
-  // Re-apply theme after navigation
-  document.addEventListener('astro:after-swap', () => {
-    document.documentElement.setAttribute('data-theme', getStoredTheme());
-  });
-</script>
-<script>
-	import { themeChange } from 'theme-change'
-	themeChange()
-
-  // Re-initialize after Astro view transitions
-  document.addEventListener('astro:after-swap', () => {
-    themeChange(false); // false = don't persist to localStorage
-  });
+<!-- Theme toggle script -->
+<script is:inline>
+  (function () {
+    function applyTheme() {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = stored ? stored === 'dark' : prefersDark;
+      document.documentElement.classList.toggle('dark', isDark);
+    }
+    applyTheme();
+    document.addEventListener('astro:after-swap', applyTheme);
+  })();
 </script>
