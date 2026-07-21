@@ -9,37 +9,31 @@ interface Props {
 
 const { elements } = Astro.props
 ---
-<ul class='space-y-8'>
-  {elements.map((element, index) => (
-    <li class='group'>
+<ul class="space-y-8">
+  {elements.map((element) => (
+    <li>
       { isSkill(element)
         ? <>
-        <h3 class='text-lg font-bold mb-2'>{element.title}</h3>
-        <p>{element.description}</p>
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2">{element.title}</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">{element.description}</p>
         </> : <>
       <a
         href={element.link as string}
-        class='block hover:text-accent transition-colors duration-200'
-        target='_blank'
-        rel='noopener noreferrer'
+        class="block text-neutral-900 hover:text-emerald-600 dark:text-neutral-50 dark:hover:text-emerald-300 transition-colors"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <h3 class='text-lg font-bold mb-2'>{element.title}</h3>
+        <h3 class="text-lg font-semibold mb-2">{element.title}</h3>
       </a>
-      <p class='text-base mb-2'>
-        <span class='font-medium'>Authors:</span>{' '}
-        <span
-          set:html={highlightAuthor(element.authors as string)}
-        />
+      <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
+        <span set:html={highlightAuthor(element.authors as string)} />
       </p>
-      <p class='text-sm mb-3'>
-        <span class='italic'>{element.journal}</span> •{' '}
-        {element.time}
+      <p class="font-mono text-xs text-neutral-500 dark:text-neutral-500 mb-3">
+        {element.journal} · {element.time}
       </p>
-      <p>{element.abstract}</p>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">{element.abstract}</p>
       </>
     }
-    {/* Uncomment this line to add a small border bottom for each element
-    {index !== elements.length -1 && <hr class="mt-6 border-primary/40" />}  */}
     </li>
   ))}
 </ul>
