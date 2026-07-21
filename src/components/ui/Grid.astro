@@ -10,32 +10,24 @@ interface Props {
 
 const {gridTitle, gridItems} = Astro.props;
 ---
-<h2 class="text-3xl font-bold mb-8">{gridTitle}</h2>
-<!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {gridItems.map((item) => (
-    <div class="p-6 rounded-lg text-base-content bg-base-200">
-      <h3 class="text-xl font-semibold mb-3">{item.title}</h3>
-      <p>{item.description}</p>
-    </div>
-  ))}
-</div> -->
+<h2 class="mb-6 text-lg font-semibold text-neutral-900 dark:text-neutral-50">{gridTitle}</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
   {gridItems.map((item) => (
     item.link ? (
-      <a 
+      <a
         href={item.link}
-        class="p-6 rounded-lg text-base-content bg-base-200 hover:bg-base-300 transition-colors no-underline block"
+        class="block rounded-lg border border-neutral-200 p-5 no-underline transition-colors hover:border-emerald-400 dark:border-neutral-800 dark:hover:border-emerald-500"
       >
-        <h3 class="text-xl font-semibold mb-3 text-accent link link-hover">
+        <h3 class="mb-2 font-medium text-emerald-600 dark:text-emerald-300">
           {item.title} →
         </h3>
-        <p>{item.description}</p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">{item.description}</p>
       </a>
     ) : (
-      <div class="p-6 rounded-lg text-base-content bg-base-200">
-        <h3 class="text-xl font-semibold mb-3">{item.title}</h3>
-        <p>{item.description}</p>
+      <div class="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
+        <h3 class="mb-2 font-medium text-neutral-900 dark:text-neutral-50">{item.title}</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">{item.description}</p>
       </div>
     )
   ))}

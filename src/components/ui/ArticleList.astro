@@ -10,16 +10,14 @@ interface Props {
 const {listTitle, listItems} = Astro.props
 ---
 
-<h2 class='text-3xl font-bold mb-8'>{listTitle}</h2>
-		<div class='space-y-6'>
-			{
-				listItems.map(item => (
-					<div class='p-6 rounded-lg text-base-content bg-base-200'>
-						<h3 class='text-xl font-semibold mb-2'>{item.title}</h3>
-						<p >
-							{item.journal} • {item.time}
-						</p>
-					</div>
-				))
-			}
+<h2 class="mb-6 text-lg font-semibold text-neutral-900 dark:text-neutral-50">{listTitle}</h2>
+<div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+	{listItems.map(item => (
+		<div class="py-3">
+			<h3 class="text-sm font-medium text-neutral-900 dark:text-neutral-50">{item.title}</h3>
+			<p class="font-mono text-xs text-neutral-500 dark:text-neutral-500">
+				{item.journal} · {item.time}
+			</p>
 		</div>
+	))}
+</div>
