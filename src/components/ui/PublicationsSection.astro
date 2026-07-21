@@ -1,0 +1,77 @@
+---
+import type { Publication } from '@/types/cv'
+import { highlightAuthor, trimExcerpt } from '@/lib/utils'
+
+interface Props {
+	publications: Publication[]
+	initialCount?: number
+}
+
+const { publications, initialCount = 2 } = Astro.props
+const hiddenCount = Math.max(publications.length - initialCount, 0)
+---
+
+<section id="publications" class="bg-neutral-50 py-20 dark:bg-neutral-900/40">
+	<div class="mx-auto max-w-4xl px-6">
+		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">Publications</p>
+		<h2 class="mb-9 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">Recent work</h2>
+
+		<div class="flex flex-col gap-5">
+			{publications.map((pub, index) => (
+				<article
+					class:list={["rounded-2xl border border-neutral-200 bg-white p-7 dark:border-neutral-800 dark:bg-neutral-950", index >= initialCount && "pub-extra hidden"]}
+				>
+					<h3 class="mb-2.5 text-lg font-bold leading-snug">
+						<a href={pub.link} target="_blank" rel="noopener noreferrer" class="text-neutral-900 no-underline dark:text-neutral-50">
+							{pub.title}
+						</a>
+					</h3>
+					<p class="mb-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+						<span set:html={highlightAuthor(pub.authors)} />
+					</p>
+					<p class="mb-3 font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">{pub.journal} · {pub.time}</p>
+					<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">{pub.abstract && trimExcerpt(pub.abstract)}</p>
+					<div class="mt-3.5 flex flex-wrap gap-2.5">
+						{pub.repo && (
+							<a href={pub.repo} target="_blank" rel="noopener noreferrer" class="rounded-lg border border-neutral-200 px-3.5 py-1.5 text-xs font-medium text-neutral-700 no-underline dark:border-neutral-800 dark:text-neutral-300">
+								Code
+							</a>
+						)}
+						<a href={pub.link} target="_blank" rel="noopener noreferrer" class="rounded-lg border border-neutral-200 px-3.5 py-1.5 text-xs font-medium text-neutral-700 no-underline dark:border-neutral-800 dark:text-neutral-300">
+							Read paper
+						</a>
+					</div>
+				</article>
+			))}
+		</div>
+
+		{hiddenCount > 0 && (
+			<button
+				id="publications-toggle"
+				type="button"
+				data-show-label={`Show ${hiddenCount} more ↓`}
+				data-hide-label="Show less ↑"
+				class="mt-6 font-mono text-sm font-semibold text-accent dark:text-accent-dark"
+			>
+				{`Show ${hiddenCount} more ↓`}
+			</button>
+		)}
+	</div>
+</section>
+
+<script is:inline>
+	(function () {
+		function bind() {
+			const btn = document.getElementById('publications-toggle');
+			if (!btn) return;
+			btn.addEventListener('click', () => {
+				const extras = document.querySelectorAll('.pub-extra');
+				const isCurrentlyHidden = extras[0]?.classList.contains('hidden');
+				extras.forEach((el) => el.classList.toggle('hidden', !isCurrentlyHidden));
+				btn.textContent = isCurrentlyHidden ? btn.dataset.hideLabel : btn.dataset.showLabel;
+			});
+		}
+		bind();
+		document.addEventListener('astro:after-swap', bind);
+	})();
+</script>

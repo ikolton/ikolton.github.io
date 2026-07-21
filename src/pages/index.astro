@@ -1,37 +1,24 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 
-import { profile, template } from '@/settings'
+import { profile } from '@/settings'
 import { publications } from '@/data/publications'
 import { sortByDateDesc } from '@/lib/utils'
 import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
-import Grid from '@/components/ui/Grid.astro'
-import ArticleList from '@/components/ui/ArticleList.astro'
+import ResearchSection from '@/components/ui/ResearchSection.astro'
+import PublicationsSection from '@/components/ui/PublicationsSection.astro'
+import BackgroundSection from '@/components/ui/BackgroundSection.astro'
+import ContactSection from '@/components/ui/ContactSection.astro'
 
-const { fullName, title, secondaryTitle, institute, research_areas } = profile
-const recentPublications = sortByDateDesc(publications).slice(0, 5)
-
-const researchGridItems = [
-  ...research_areas,
-  {
-    title: 'More',
-    description: 'See the full list of publications.',
-    link: `${template.base}/publications`,
-  },
-]
+const { fullName, title, secondaryTitle, institute, bio, research_areas } = profile
+const orderedPublications = sortByDateDesc(publications)
 ---
 
 <Layout>
-	<section class="border-b border-neutral-200 pb-12 dark:border-neutral-800">
-		<Hero fullName={fullName} title={title} secondaryTitle={secondaryTitle} institute={institute} profilePicture={ProfilePictures} />
-	</section>
-
-	<section class="border-b border-neutral-200 py-12 dark:border-neutral-800">
-		<Grid gridTitle="Research Areas" gridItems={researchGridItems} />
-	</section>
-
-	<section class="py-12">
-		<ArticleList listTitle="Recent Publications" listItems={recentPublications} />
-	</section>
+	<Hero fullName={fullName} title={title} secondaryTitle={secondaryTitle} institute={institute} bio={bio} profilePicture={ProfilePictures} />
+	<ResearchSection areas={research_areas} />
+	<PublicationsSection publications={orderedPublications} />
+	<BackgroundSection />
+	<ContactSection />
 </Layout>

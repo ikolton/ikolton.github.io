@@ -1,39 +1,36 @@
 ---
 import { profile, template } from '@/settings'
-import SocialIcons from './SocialIcons.astro'
 import ThemeToggle from './ThemeToggle.astro'
-import { getCollection } from 'astro:content'
-
-const isBlogPopulated = template.enableBlog
-	? await getCollection('blog').then((collection) => collection.length > 0)
-	: false
 
 const navItems = [
-	{ href: `${template.base}/`, label: 'Home' },
-	{ href: `${template.base}/publications`, label: 'Publications' },
+	{ href: `${template.base}/#research`, label: 'Research' },
+	{ href: `${template.base}/#publications`, label: 'Publications' },
+	{ href: `${template.base}/#background`, label: 'Background' },
 	{ href: `${template.base}/cv`, label: 'CV' },
-	...(isBlogPopulated ? [{ href: `${template.base}/blog/1`, label: 'Blog' }] : []),
-	{ href: `${template.base}/contact`, label: 'Contact' },
+	{ href: `${template.base}/#contact`, label: 'Contact' },
 ]
 
 const { fullName } = profile
+const initials = fullName
+	.split(' ')
+	.map((part) => part[0])
+	.join('')
 ---
 
-<header class="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 py-5 dark:border-neutral-800">
-	<a href={`${template.base}/`} class="text-sm font-bold uppercase tracking-wide no-underline hover:opacity-80">
-		{fullName}
-	</a>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80">
+	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+		<a href={`${template.base}/`} class="font-mono text-base font-semibold tracking-wide text-neutral-900 no-underline dark:text-neutral-50">
+			{initials}
+		</a>
 
-	<nav class="flex flex-wrap items-center gap-5 text-sm text-neutral-600 dark:text-neutral-300">
-		{navItems.map((item) => (
-			<a href={item.href} class="hover:text-neutral-900 dark:hover:text-white">
-				{item.label}
-			</a>
-		))}
-	</nav>
+		<nav class="flex flex-wrap items-center gap-7 text-sm text-neutral-600 dark:text-neutral-400">
+			{navItems.map((item) => (
+				<a href={item.href} class="transition-colors hover:text-accent dark:hover:text-accent-dark">
+					{item.label}
+				</a>
+			))}
+		</nav>
 
-	<div class="flex items-center gap-3">
-		<SocialIcons />
 		<ThemeToggle />
 	</div>
 </header>

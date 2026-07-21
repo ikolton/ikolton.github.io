@@ -13,6 +13,9 @@ const { title, description, image } = Astro.props
 
 <meta charset='utf-8' />
 <meta name='viewport' content='width=device-width,initial-scale=1' />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <!-- <link
 	rel='icon'
 	type='image/svg+xml'
@@ -52,8 +55,8 @@ const { title, description, image } = Astro.props
   (function () {
     function applyTheme() {
       const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = stored ? stored === 'dark' : prefersDark;
+      // Dark by default — only an explicit stored preference switches to light.
+      const isDark = stored ? stored === 'dark' : true;
       document.documentElement.classList.toggle('dark', isDark);
     }
     applyTheme();

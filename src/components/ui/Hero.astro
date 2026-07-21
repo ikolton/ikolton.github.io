@@ -1,27 +1,54 @@
 ---
 import { Image } from 'astro:assets'
-import SocialIcons from './SocialIcons.astro'
+import { social, template } from '@/settings'
 
-const { fullName, title, secondaryTitle, institute, profilePicture } = Astro.props
+const { fullName, title, secondaryTitle, institute, bio, profilePicture } = Astro.props
 
 const tags = [title, secondaryTitle, institute].filter(Boolean)
+
+const socialLinks = [
+	social.email && { label: 'Email', href: `mailto:${social.email}` },
+	social.linkedin && { label: 'LinkedIn', href: social.linkedin },
+	social.github && { label: 'GitHub', href: social.github },
+	social.scholar && { label: 'Scholar', href: social.scholar },
+].filter(Boolean) as { label: string; href: string }[]
 ---
 
-<div class="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
-	<div class="max-w-xl">
-		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-300">
+<section id="home" class="mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 py-16 sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:py-24">
+	<div class="w-full max-w-xl flex-1 text-center sm:text-left">
+		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">
 			{tags.join(' · ')}
 		</p>
-		<h1 class="mb-4 text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+		<h1 class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl dark:text-neutral-50">
 			{fullName}
 		</h1>
-		<div class="mt-6">
-			<SocialIcons />
+		<p class="mb-8 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+			{bio}
+		</p>
+		<div class="mb-7 flex flex-wrap justify-center gap-3 sm:justify-start">
+			<a href={`${template.base}/#publications`} class="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white no-underline dark:bg-accent-dark dark:text-neutral-950">
+				See publications
+			</a>
+			<a href={`${template.base}/#contact`} class="rounded-lg border border-neutral-300 px-5 py-2.5 text-sm font-medium text-neutral-900 no-underline dark:border-neutral-700 dark:text-neutral-50">
+				Get in touch
+			</a>
+		</div>
+		<div class="flex flex-wrap justify-center gap-2.5 sm:justify-start">
+			{socialLinks.map((link) => (
+				<a
+					href={link.href}
+					target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+					rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+					class="rounded-full border border-neutral-300 px-3.5 py-1.5 font-mono text-xs text-neutral-600 no-underline transition-colors hover:border-accent hover:text-accent dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-accent-dark dark:hover:text-accent-dark"
+				>
+					{link.label}
+				</a>
+			))}
 		</div>
 	</div>
 	<Image
 		src={profilePicture}
 		alt={fullName}
-		class="hidden size-40 rounded-full object-cover lg:block"
+		class="size-[clamp(9rem,14vw,14rem)] flex-none rounded-full border-2 border-neutral-200 object-cover dark:border-neutral-800"
 	/>
-</div>
+</section>

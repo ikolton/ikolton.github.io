@@ -2,96 +2,97 @@
 import Layout from "@/layouts/Layout.astro";
 import { experiences, education, skills, awards } from "@/data/cv";
 import { publications } from "@/data/publications";
-import CvTimeline from "@/components/ui/CvTimeline.astro";
+import { profile } from "@/settings";
+import { sortByEndDateDesc, sortByDateDesc, highlightAuthor } from "@/lib/utils";
+import TimelineColumn from "@/components/ui/TimelineColumn.astro";
+import SkillsGrid from "@/components/ui/SkillsGrid.astro";
 
-import type { Experience, Education, Award } from "@/types/cv";
-import List from "@/components/ui/List.astro";
-import PublicationsList from "@/components/ui/PublicationsList.astro";
-import { sortByDateDesc } from "@/lib/utils";
-import { template } from "@/settings";
+const educationItems = sortByEndDateDesc(education).map((item) => ({
+	time: item.time,
+	title: item.degree,
+	org: item.location ? `${item.school} · ${item.location}` : item.school,
+	description: item.description,
+}));
 
-// Experiences/education carry a "start - end" range; order by the end date,
-// keeping anything marked present/now/current/today first. Sort on copies so
-// the shared imported arrays are never mutated.
-const orderByEndDate = <T extends { time: string }>(a: T, b: T) => {
-	const presentValues = ["present", "now", "current", "today"];
-	if (presentValues.includes(a.time?.split(" - ")[1]?.toLowerCase())) {
-		return -1;
-	}
-	const dateA = new Date(a.time?.split(" - ")[1]);
-	const dateB = new Date(b.time?.split(" - ")[1]);
-	return dateB.getTime() - dateA.getTime();
-};
+const experienceItems = sortByEndDateDesc(experiences).map((item) => ({
+	time: item.time,
+	title: item.title,
+	org: item.location ? `${item.company} · ${item.location}` : item.company,
+	description: item.description,
+}));
 
-const orderedExperiences: Experience[] = [...experiences].sort(orderByEndDate);
-const orderedEducations: Education[] = [...education].sort(orderByEndDate);
-const orderedAwards: Award[] = sortByDateDesc(awards);
+const orderedAwards = sortByDateDesc(awards);
 const orderedPublications = sortByDateDesc(publications);
 ---
 
 <Layout title="CV">
-	<section class="mb-12">
-		<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">About Me</h2>
-		<p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
-			I'm a PhD student in Computer Science at Jagiellonian University, working on machine learning, computer vision, and generative models, with applications ranging from medical imaging to AI safety. My PhD focuses on medical imaging. I'm also passionate about software engineering — I enjoy low-level programming in C++, designing systems and architectures, and building practical tools that solve real problems.
+	<div class="mx-auto max-w-4xl px-6 py-16">
+		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">CV</p>
+		<h1 class="mb-6 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{profile.fullName}</h1>
+		<p class="mb-16 max-w-2xl text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+			{profile.bio}
 		</p>
-	</section>
 
-	{orderedEducations.length > 0 && (
-		<section class="mb-12">
-			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Education</h2>
-			<CvTimeline elements={orderedEducations} />
-		</section>
-	)}
+		{(educationItems.length > 0 || experienceItems.length > 0) && (
+			<section class="mb-16">
+				<div class="flex flex-wrap gap-12">
+					{educationItems.length > 0 && <TimelineColumn label="Education" items={educationItems} />}
+					{experienceItems.length > 0 && <TimelineColumn label="Experience" items={experienceItems} />}
+				</div>
+			</section>
+		)}
 
-	{orderedExperiences.length > 0 && (
-		<section class="mb-12">
-			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Experience</h2>
-			<CvTimeline elements={orderedExperiences} />
-		</section>
-	)}
+		{orderedAwards.length > 0 && (
+			<section class="mb-16">
+				<p class="mb-4 text-[13px] font-semibold text-neutral-500 dark:text-neutral-500">Grants & Awards</p>
+				<div class="flex flex-col gap-4">
+					{orderedAwards.map((award) => (
+						<div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
+							<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+								<strong class="font-semibold text-neutral-900 dark:text-neutral-50">
+									{award.link ? (
+										<a href={award.link} target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">
+											{award.title}
+										</a>
+									) : (
+										award.title
+									)}
+								</strong>
+								{" "}({award.time}) — {award.issuer}
+								{award.description && <>. {award.description}</>}
+							</p>
+						</div>
+					))}
+				</div>
+			</section>
+		)}
 
-	{orderedAwards.length > 0 && (
-		<section class="mb-12">
-			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">Grants & Awards</h2>
-			<div class="space-y-6">
-				{orderedAwards.map((award) => (
-					<div class="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
-						<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-50">
-							{award.link ? (
-								<a href={award.link} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-300">
-									{award.title}
+		{skills.length > 0 && (
+			<section class="mb-16">
+				<p class="mb-5 text-[13px] font-semibold text-neutral-500 dark:text-neutral-500">Skills</p>
+				<SkillsGrid skills={skills} />
+			</section>
+		)}
+
+		{orderedPublications.length > 0 && (
+			<section>
+				<p class="mb-5 text-[13px] font-semibold text-neutral-500 dark:text-neutral-500">Publications</p>
+				<div class="flex flex-col gap-5">
+					{orderedPublications.map((pub) => (
+						<article class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
+							<h3 class="mb-2 text-base font-bold leading-snug">
+								<a href={pub.link} target="_blank" rel="noopener noreferrer" class="text-neutral-900 no-underline dark:text-neutral-50">
+									{pub.title}
 								</a>
-							) : (
-								award.title
-							)}
-						</h3>
-						<p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-							{award.issuer} · {award.time}
-						</p>
-						{award.description && (
-							<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{award.description}</p>
-						)}
-					</div>
-				))}
-			</div>
-		</section>
-	)}
-
-	{skills.length > 0 && (
-		<section class="mb-12">
-			<List listTitle="Skills" listItems={skills} />
-		</section>
-	)}
-
-	{orderedPublications.length > 0 && (
-		<section class="mb-12">
-			<h2 class="mb-6 border-b border-neutral-200 pb-2 text-lg font-semibold text-neutral-900 dark:border-neutral-800 dark:text-neutral-50">
-				<a href={`${template.base}/publications`} class="hover:text-emerald-600 dark:hover:text-emerald-300 transition-colors">
-					Publications
-				</a>
-			</h2>
-			<PublicationsList elements={orderedPublications} />
-		</section>
-	)}
+							</h3>
+							<p class="mb-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+								<span set:html={highlightAuthor(pub.authors)} />
+							</p>
+							<p class="font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">{pub.journal} · {pub.time}</p>
+						</article>
+					))}
+				</div>
+			</section>
+		)}
+	</div>
 </Layout>

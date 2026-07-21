@@ -1,0 +1,52 @@
+---
+import { experiences, education, skills, awards } from '@/data/cv'
+import { sortByEndDateDesc, sortByDateDesc } from '@/lib/utils'
+import TimelineColumn from './TimelineColumn.astro'
+import SkillsGrid from './SkillsGrid.astro'
+import { template } from '@/settings'
+
+const educationItems = sortByEndDateDesc(education).map((item) => ({
+	time: item.time,
+	title: item.degree,
+	org: item.location ? `${item.school} · ${item.location}` : item.school,
+}))
+
+const experienceItems = sortByEndDateDesc(experiences).map((item) => ({
+	time: item.time,
+	title: item.title,
+	org: item.location ? `${item.company} · ${item.location}` : item.company,
+}))
+
+const latestAward = sortByDateDesc(awards)[0]
+---
+
+<section id="background" class="border-y border-neutral-200 bg-white py-20 dark:border-neutral-800 dark:bg-neutral-950">
+	<div class="mx-auto max-w-6xl px-6">
+		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">Background</p>
+		<h2 class="mb-9 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">Education & experience</h2>
+
+		<div class="mb-10 flex flex-wrap gap-12">
+			<TimelineColumn label="Education" items={educationItems} />
+			<TimelineColumn label="Experience" items={experienceItems} />
+		</div>
+
+		{latestAward && (
+			<div class="mb-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
+				<p class="mb-2 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">Grant</p>
+				<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+					<strong class="font-semibold text-neutral-900 dark:text-neutral-50">{latestAward.title}</strong> ({latestAward.time}) — {latestAward.description}
+				</p>
+			</div>
+		)}
+
+		{skills.length > 0 && (
+			<div class="mb-8">
+				<SkillsGrid skills={skills} />
+			</div>
+		)}
+
+		<a href={`${template.base}/cv`} class="font-mono text-sm font-semibold text-accent no-underline dark:text-accent-dark">
+			Full CV →
+		</a>
+	</div>
+</section>

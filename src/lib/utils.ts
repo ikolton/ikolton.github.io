@@ -20,3 +20,18 @@ export function sortByDateDesc<T extends { time: string }>(items: T[]): T[] {
 		(a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
 	)
 }
+
+// Experiences/education carry a "start - end" range; order by the end date,
+// keeping anything marked present/now/current/today first. Returns a new
+// array, does not mutate the input.
+export function sortByEndDateDesc<T extends { time: string }>(items: T[]): T[] {
+	const presentValues = ['present', 'now', 'current', 'today']
+	return [...items].sort((a, b) => {
+		if (presentValues.includes(a.time?.split(' - ')[1]?.toLowerCase())) {
+			return -1
+		}
+		const dateA = new Date(a.time?.split(' - ')[1])
+		const dateB = new Date(b.time?.split(' - ')[1])
+		return dateB.getTime() - dateA.getTime()
+	})
+}

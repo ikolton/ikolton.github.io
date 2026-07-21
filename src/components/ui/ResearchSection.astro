@@ -1,0 +1,29 @@
+---
+interface Props {
+	areas: { title: string; description: string }[]
+}
+
+const { areas } = Astro.props
+---
+
+<section id="research" class="border-y border-neutral-200 bg-white py-20 dark:border-neutral-800 dark:bg-neutral-950">
+	<div class="mx-auto flex max-w-6xl flex-wrap gap-14 px-6">
+		<div class="max-w-sm flex-1">
+			<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">Research</p>
+			<h2 class="mb-4 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">What I work on</h2>
+			<p class="text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+				</p>
+		</div>
+		<div class="min-w-0 flex flex-[1.4] flex-col">
+			{areas.map((area, index) => (
+				<div class:list={["flex gap-6", index === 0 ? "pb-8" : "border-t border-neutral-200 pt-8 pb-8 dark:border-neutral-800"]}>
+					<span class="flex-none pt-0.5 font-mono text-sm text-accent dark:text-accent-dark">0{index + 1}</span>
+					<div>
+						<h3 class="mb-2 text-lg font-semibold text-neutral-900 dark:text-neutral-50">{area.title}</h3>
+						<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">{area.description}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

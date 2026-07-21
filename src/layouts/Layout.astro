@@ -26,14 +26,12 @@ const {
 		{template.transitions && <ClientRouter />}
 		<Head title={title} description={description} image={image} />
 	</head>
-	<body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-		<div class="mx-auto flex min-h-screen max-w-4xl flex-col px-6">
-			<Navbar />
-			<main class="flex-1 py-10">
-				<slot />
-			</main>
-			<Footer />
-		</div>
+	<body class="flex min-h-screen flex-col bg-white font-sans text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+		<Navbar />
+		<main class="flex-1">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
 
