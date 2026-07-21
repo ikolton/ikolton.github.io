@@ -1,58 +1,41 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { publications } from "@/data/publications";
+import { sortByDateDesc } from "@/lib/utils";
 import { highlightAuthor } from "@/lib/utils";
 
-const ALL_PAPERS = publications; // This will be replaced with dynamic data later
+const ALL_PUBLICATIONS = sortByDateDesc(publications);
 ---
 
-<Layout title="Papers">
-  <div class="prose max-w-none">
-    <h1 class="text-3xl font-bold mb-8">Publications</h1>
+<Layout title="Publications">
+  <h1 class="mb-8 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">Publications</h1>
 
-    <div class="space-y-8">
-      {
-        ALL_PAPERS.map((paper) => (
-          <div class="card bg-base-200">
-            <div class="card-body">
-              <h2 class="card-title text-xl">
-                <a href={paper.link} target="_blank" rel="noopener noreferrer" class="hover:text-accent">
-                  {paper.title}
-                </a>
-              </h2>
-              <p class="text-base mb-2">
-                <span class="font-medium">Authors:</span>{" "}
-                <span set:html={highlightAuthor(paper.authors)} />
-              </p>
-              <p class="text-sm mb-3">
-                <span class="italic">{paper.journal}</span> • {paper.time}
-              </p>
-              <p class="text-sm text-base-content/80">{paper.abstract}</p>
-              <div class="card-actions justify-end mt-4 gap-2">
-                {paper.repo && (
-                  <a href={paper.repo} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary text-secondary-content">
-                    Code
-                  </a>
-                )}
-                <a href={paper.link} target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary text-secondary-content">
-                  Read Paper
-                </a>
-              </div>
-
-            </div>
-          </div>
-        ))
-      }
-    </div>
-
-    <!-- <div class="flex justify-center mt-8">
-      <div class="join">
-        <button class="join-item btn btn-sm">«</button>
-        <button class="join-item btn btn-sm">1</button>
-        <button class="join-item btn btn-sm btn-active">2</button>
-        <button class="join-item btn btn-sm">3</button>
-        <button class="join-item btn btn-sm">»</button>
-      </div>
-    </div> -->
+  <div class="space-y-10">
+    {ALL_PUBLICATIONS.map((paper) => (
+      <article class="border-b border-neutral-200 pb-10 last:border-b-0 dark:border-neutral-800">
+        <h2 class="text-lg font-semibold">
+          <a href={paper.link} target="_blank" rel="noopener noreferrer" class="text-neutral-900 hover:text-emerald-600 dark:text-neutral-50 dark:hover:text-emerald-300">
+            {paper.title}
+          </a>
+        </h2>
+        <p class="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+          <span set:html={highlightAuthor(paper.authors)} />
+        </p>
+        <p class="mt-1 font-mono text-xs text-neutral-500 dark:text-neutral-500">
+          {paper.journal} · {paper.time}
+        </p>
+        <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">{paper.abstract}</p>
+        <div class="mt-4 flex gap-3">
+          {paper.repo && (
+            <a href={paper.repo} target="_blank" rel="noopener noreferrer" class="rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:border-emerald-400 hover:text-emerald-600 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-emerald-500 dark:hover:text-emerald-300">
+              Code
+            </a>
+          )}
+          <a href={paper.link} target="_blank" rel="noopener noreferrer" class="rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-medium text-neutral-700 hover:border-emerald-400 hover:text-emerald-600 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-emerald-500 dark:hover:text-emerald-300">
+            Read Paper
+          </a>
+        </div>
+      </article>
+    ))}
   </div>
 </Layout>
