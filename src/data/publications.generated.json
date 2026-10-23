@@ -1,5 +1,12 @@
 [
   {
+    "title": "Diagnostic Loss: Asymmetric Supervision for Radiology Report Generation",
+    "authors": "Ignacy Kolton, Wenxuan Li, Zongwei Zhou, Jarosław B. Ćwikła, Arkadiusz Sitek, Pedro R. A. S. Bassi, Szymon Płotka",
+    "journal": "arXiv preprint arXiv:2610.30980",
+    "time": "2026",
+    "link": "https://arxiv.org/abs/2610.30980"
+  },
+  {
     "title": "ReLAPSe: Reinforcement-Learning-trained Adversarial Prompt Search for Erased concepts in unlearned diffusion models",
     "authors": "Ignacy Kolton, Kacper Marzol, Paweł Batorski, Marcin Mazur, Paul Swoboda, Przemysław Spurek",
     "journal": "arXiv preprint arXiv:2602.00350",
