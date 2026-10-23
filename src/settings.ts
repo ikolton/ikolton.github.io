@@ -3,7 +3,7 @@ export const profile = {
 	title: 'PhD Candidate in Technical Computer Science',
 	secondaryTitle: '',
 	institute: 'Jagiellonian University',
-	bio: "I work on machine learning for medical imaging and I'm a member of the GMUM research group.",
+	bio: "I work on machine learning for medical imaging and I'm a member of the GMUM research group at Jagiellonian University.",
 	group: { name: 'GMUM', url: 'https://gmum.net/' }, // Linked wherever the bio mentions it
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
 	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
@@ -11,7 +11,7 @@ export const profile = {
 	research_areas: [
 		{
 			title: 'Medical Imaging',
-			description: 'Primary PhD focus: applying machine learning and computer vision to multimodal medical data for diagnostic and research purposes.',
+			description: 'Applying machine learning and computer vision to multimodal medical data for diagnostic and research purposes.',
 		},
 		{
 			title: 'Computer Vision & Generative Models',
