@@ -6,7 +6,7 @@ export const profile = {
 	bio: "I'm a PhD student in Computer Science at Jagiellonian University, working on machine learning, computer vision, and generative models — mainly applied to medical imaging.",
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
 	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
-	research_summary: 'My PhD focuses on foundation models for multimodal medical data, alongside 3D representations of medical volumes.',
+	research_summary: 'My PhD focuses on foundation models for multimodal medical data. Beyond my PhD, I also work on 3D representations of medical volumes.',
 	research_areas: [
 		{
 			title: 'Medical Imaging',
