@@ -2,7 +2,7 @@ export const profile = {
 	fullName: 'Ignacy Kolton',
 	title: 'PhD Candidate in Technical Computer Science',
 	secondaryTitle: '',
-	institute: 'Jagiellonian University',
+	institute: '',
 	bio: "I work on machine learning for medical imaging and I'm a member of the GMUM research group at Jagiellonian University.",
 	group: { name: 'GMUM', url: 'https://gmum.net/' }, // Linked wherever the bio mentions it
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
