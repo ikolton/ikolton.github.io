@@ -1,8 +1,7 @@
 ---
-import { experiences, education, skills, awards } from '@/data/cv'
+import { experiences, education, awards } from '@/data/cv'
 import { sortByEndDateDesc, sortByDateDesc } from '@/lib/utils'
 import TimelineColumn from './TimelineColumn.astro'
-import SkillsGrid from './SkillsGrid.astro'
 import { template } from '@/settings'
 
 const educationItems = sortByEndDateDesc(education).map((item) => ({
@@ -36,12 +35,6 @@ const latestAward = sortByDateDesc(awards)[0]
 				<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">
 					<strong class="font-semibold text-neutral-900 dark:text-neutral-50">{latestAward.title}</strong> ({latestAward.time}) — {latestAward.description}
 				</p>
-			</div>
-		)}
-
-		{skills.length > 0 && (
-			<div class="mb-8">
-				<SkillsGrid skills={skills} />
 			</div>
 		)}
 

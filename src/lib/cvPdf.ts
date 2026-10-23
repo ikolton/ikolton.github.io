@@ -12,6 +12,7 @@ export interface CvPdfData {
 	authorName: string
 	websiteUrl: string
 	contacts: { label: string; href: string }[]
+	researchInterests?: string
 	education: { degree: string; school: string; location?: string; time: string; description?: string }[]
 	experiences: { title: string; company: string; location?: string; time: string; description?: string }[]
 	publications: Publication[]
@@ -20,7 +21,7 @@ export interface CvPdfData {
 	updated: Date
 }
 
-const MARGIN = 48
+const MARGIN = 44
 const TEXT = '#111111'
 const MUTED = '#555555'
 const RULE = '#cccccc'
@@ -52,7 +53,7 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 
 	const section = (heading: string) => {
 		if (doc.y > pageBottom() - 80) doc.addPage()
-		else doc.moveDown(0.9)
+		else doc.moveDown(0.8)
 		doc.font('bold').fontSize(10.5).fillColor(TEXT).text(heading.toUpperCase(), left, doc.y, { characterSpacing: 0.8 })
 		const ruleY = doc.y + 2
 		doc.moveTo(left, ruleY).lineTo(left + width, ruleY).lineWidth(0.5).strokeColor(RULE).stroke()
@@ -90,6 +91,11 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 		doc.text(contact.label, { link: contact.href, continued: !last })
 		if (!last) doc.text('  ·  ', { link: null, continued: true })
 	})
+
+	if (data.researchInterests) {
+		section('Research Interests')
+		body(data.researchInterests)
+	}
 
 	if (data.education.length > 0) {
 		section('Education')
@@ -159,10 +165,15 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 		})
 	}
 
+	// The footer sits in the bottom margin of the last page, so it never
+	// pushes the CV onto an extra page. Zeroing the margin stops pdfkit from
+	// treating text placed there as overflow.
 	const updated = data.updated.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
-	doc.moveDown(1.5)
+	const bottomMargin = doc.page.margins.bottom
+	doc.page.margins.bottom = 0
 	doc.font('regular').fontSize(8).fillColor(MUTED)
-		.text(`Updated ${updated} · ${hostOf(data.websiteUrl)}`, left, doc.y, { width, align: 'center', link: data.websiteUrl })
+		.text(`Updated ${updated} · ${hostOf(data.websiteUrl)}`, left, doc.page.height - bottomMargin + 14, { width, align: 'center', link: data.websiteUrl })
+	doc.page.margins.bottom = bottomMargin
 
 	doc.end()
 	return done
