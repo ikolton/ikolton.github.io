@@ -10,7 +10,6 @@ const data: CvPdfData = {
   authorName: "Jane Doe",
   websiteUrl: "https://example.com",
   contacts: [{ label: "jane@example.com", href: "mailto:jane@example.com" }],
-  researchAreas: [{ title: "Medical Imaging", description: "Machine learning for CT." }],
   education: [{ degree: "PhD", school: "Example University", time: "2026 - present" }],
   experiences: [{ title: "Intern", company: "Example Co", time: "05.2024 - 11.2024" }],
   publications: [

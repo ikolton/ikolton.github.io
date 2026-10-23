@@ -12,7 +12,6 @@ export interface CvPdfData {
 	authorName: string
 	websiteUrl: string
 	contacts: { label: string; href: string }[]
-	researchAreas: { title: string; description: string }[]
 	education: { degree: string; school: string; location?: string; time: string; description?: string }[]
 	experiences: { title: string; company: string; location?: string; time: string; description?: string }[]
 	publications: Publication[]
@@ -21,7 +20,7 @@ export interface CvPdfData {
 	updated: Date
 }
 
-const MARGIN = 56
+const MARGIN = 48
 const TEXT = '#111111'
 const MUTED = '#555555'
 const RULE = '#cccccc'
@@ -53,7 +52,7 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 
 	const section = (heading: string) => {
 		if (doc.y > pageBottom() - 80) doc.addPage()
-		else doc.moveDown(1.1)
+		else doc.moveDown(0.9)
 		doc.font('bold').fontSize(10.5).fillColor(TEXT).text(heading.toUpperCase(), left, doc.y, { characterSpacing: 0.8 })
 		const ruleY = doc.y + 2
 		doc.moveTo(left, ruleY).lineTo(left + width, ruleY).lineWidth(0.5).strokeColor(RULE).stroke()
@@ -92,15 +91,6 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 		if (!last) doc.text('  ·  ', { link: null, continued: true })
 	})
 
-	if (data.researchAreas.length > 0) {
-		section('Research')
-		data.researchAreas.forEach((area, index) => {
-			if (index > 0) doc.moveDown(0.4)
-			doc.font('bold').fontSize(10).fillColor(TEXT).text(area.title, left, doc.y, { width })
-			body(area.description)
-		})
-	}
-
 	if (data.education.length > 0) {
 		section('Education')
 		sortByEndDateDesc(data.education).forEach((item, index) => {
@@ -117,13 +107,17 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 			if (index > 0) doc.moveDown(0.6)
 			if (doc.y > pageBottom() - 50) doc.addPage()
 			doc.fontSize(9.5).fillColor(TEXT)
+			// The closing period rides on the last author chunk: pdfkit may break
+			// a line between continued chunks, which would orphan a lone ".".
 			const [before, ...rest] = pub.authors.split(data.authorName)
-			doc.font('regular').text(before, left, doc.y, { width, continued: true, lineGap: 1 })
-			if (rest.length > 0) {
-				doc.font('bold').text(data.authorName, { continued: true })
-				doc.font('regular').text(rest.join(data.authorName), { continued: true })
+			const after = rest.join(data.authorName)
+			if (rest.length === 0) {
+				doc.font('regular').text(`${before}. `, left, doc.y, { width, continued: true, lineGap: 1 })
+			} else {
+				doc.font('regular').text(before, left, doc.y, { width, continued: true, lineGap: 1 })
+				doc.font('bold').text(after ? data.authorName : `${data.authorName}.`, { continued: true })
+				doc.font('regular').text(after ? `${after}. ` : ' ', { continued: true })
 			}
-			doc.text('. ', { continued: true })
 			doc.font('bold').text(`${pub.title}. `, { continued: true })
 			doc.font('regular').text(`${pub.journal}, ${pub.time}.`)
 			const links = [pub.link, pub.repo].filter((url): url is string => Boolean(url))
