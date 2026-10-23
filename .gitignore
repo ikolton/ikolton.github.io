@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # brainstorming session mockups
 .superpowers/
+
+# generated at build time by scripts/generate-cv-pdf.ts
+public/cv.pdf

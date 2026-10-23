@@ -1,10 +1,17 @@
 export const experiences = [
 	{
+		company: 'GMUM',
+		time: '2026 - present',
+		title: 'Research Group Member',
+		location: 'Jagiellonian University',
+		description: 'Machine learning research group.',
+	},
+	{
 		company: 'HERE Technologies',
 		time: '05.2024 - 11.2024',
 		title: 'Software Engineer Internship',
 		location: '',
-		description: 'Refactored legacy code in Java and Swift, improving structure and readability, and updated unit and integration tests to increase coverage and reliability. Optimized older C++ components by enhancing memory usage and execution time. Collaborated closely with the team in Agile ceremonies and daily work to clarify requirements and align technical decisions. Used GitLab for version control and CI, and worked with internal tooling for builds and testing.',
+		description: 'Refactored and tested legacy Java, Swift and C++ code, improving maintainability, memory usage and execution time.',
 	},
 	// {
 	// 	company: 'Radium Institute (Institut du Radium)',
@@ -21,7 +28,7 @@ export const education = [
 		time: '2021 - 2024',
 		degree: 'Bachelor’s in Computer Science',
 		location: 'Krakow, Poland',
-		description: 'Developed a strong foundation in computer science and mathematics, along with practical experience in software development for web, mobile, and desktop platforms.',
+		description: 'Developed a strong foundation in computer science and mathematics.',
 
 	},
 	{
@@ -29,14 +36,14 @@ export const education = [
 		time: '2024 - 2026',
 		degree: 'Master’s in Computer Science',
 		location: 'Krakow, Poland',
-		description: 'Focused on machine learning and computer vision, with involvement in practical research projects and publications. Continued developing programming skills, including low-level languages such as assembler.',
+		description: 'Focused on machine learning and computer vision, with involvement in research projects and publications.',
 	},
 	{
 		school: 'Jagiellonian University',
 		time: '2026 - present',
 		degree: 'PhD in Technical Computer Science',
 		location: 'Krakow, Poland',
-		description: 'Doctoral School of Exact and Natural Sciences, focused on deep learning, computer vision, and medical imaging.',
+		description: 'Doctoral School of Exact and Natural Sciences. Research on foundation models for multimodal medical data.',
 	},
 	// {
 	// 	school: 'University of Paris',
