@@ -18,12 +18,12 @@ const initials = fullName
 ---
 
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80">
-	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 py-4">
 		<a href={`${template.base}/`} class="font-mono text-base font-semibold tracking-wide text-neutral-900 no-underline dark:text-neutral-50">
 			{initials}
 		</a>
 
-		<nav class="flex flex-wrap items-center gap-7 text-sm text-neutral-600 dark:text-neutral-400">
+		<nav class="order-last flex w-full flex-wrap items-center justify-between gap-x-2 gap-y-2 text-[13px] text-neutral-600 sm:order-none sm:w-auto sm:justify-start sm:gap-7 sm:text-sm dark:text-neutral-400">
 			{navItems.map((item) => (
 				<a href={item.href} class="transition-colors hover:text-accent dark:hover:text-accent-dark">
 					{item.label}

@@ -34,7 +34,7 @@ export const social = {
 }
 
 export const template = {
-	website_url: 'https://ikolton.github.io', // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
+	website_url: 'https://ikolton.com', // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
 	menu_left: false,
 	transitions: true,
 	excerptLength: 200,
