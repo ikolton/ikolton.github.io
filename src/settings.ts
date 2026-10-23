@@ -1,9 +1,9 @@
 export const profile = {
 	fullName: 'Ignacy Kolton',
-	title: 'PhD student in Computer Science',
+	title: 'PhD Candidate in Technical Computer Science',
 	secondaryTitle: 'Machine Learning Researcher',
 	institute: 'Jagiellonian University',
-	bio: "I'm a PhD student in Computer Science at Jagiellonian University, working on machine learning, computer vision, and generative models — mainly applied to medical imaging.",
+	bio: "I'm a PhD candidate in Technical Computer Science at Jagiellonian University and a member of GMUM, working on foundation models for multimodal medical data.",
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
 	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
 	research_summary: 'My PhD focuses on foundation models for multimodal medical data. Beyond my PhD, I also work on 3D representations of medical volumes.',
@@ -45,6 +45,6 @@ export const template = {
 
 export const seo = {
 	default_title: 'Ignacy Kolton',
-	default_description: 'Personal website of Ignacy Kolton, PhD student in Computer Science at Jagiellonian University.',
+	default_description: 'Personal website of Ignacy Kolton, PhD candidate in Technical Computer Science at Jagiellonian University.',
 	default_image: '/images/favicon.ico',
 }

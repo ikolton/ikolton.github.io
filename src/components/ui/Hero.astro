@@ -16,8 +16,10 @@ const socialLinks = [
 
 <section id="home" class="mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 px-6 py-16 sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:py-24">
 	<div class="w-full max-w-xl flex-1 text-center sm:text-left">
-		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">
-			{tags.join(' · ')}
+		<p class="mb-3 flex flex-wrap justify-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-widest text-accent sm:justify-start dark:text-accent-dark">
+			{tags.map((tag, index) => (
+				<span>{tag}{index < tags.length - 1 && ' ·'}</span>
+			))}
 		</p>
 		<h1 class="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl dark:text-neutral-50">
 			{fullName}
