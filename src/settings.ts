@@ -1,16 +1,17 @@
 export const profile = {
 	fullName: 'Ignacy Kolton',
-	title: 'PhD student in Computer Science',
-	secondaryTitle: 'Machine Learning Researcher',
-	institute: 'Jagiellonian University',
-	bio: "I'm a PhD student in Computer Science at Jagiellonian University, working on machine learning, computer vision, and generative models — mainly applied to medical imaging.",
+	title: 'PhD Candidate in Technical Computer Science',
+	secondaryTitle: '',
+	institute: '',
+	bio: "I work on machine learning for medical imaging and I'm a member of the GMUM research group at Jagiellonian University.",
+	group: { name: 'GMUM', url: 'https://gmum.net/' }, // Linked wherever the bio mentions it
 	author_name: 'Ignacy Kolton', // Author name to be highlighted in the papers section
 	semanticScholarAuthorId: '', // Fill in your Semantic Scholar author ID (from your profile URL: semanticscholar.org/author/.../<ID>) to enable auto-fetching publications at build time. Leave empty to keep the committed src/data/publications.generated.json as-is.
 	research_summary: 'My PhD focuses on foundation models for multimodal medical data. Beyond my PhD, I also work on 3D representations of medical volumes.',
 	research_areas: [
 		{
 			title: 'Medical Imaging',
-			description: 'Primary PhD focus: applying machine learning and computer vision to multimodal medical data for diagnostic and research purposes.',
+			description: 'Applying machine learning and computer vision to multimodal medical data for diagnostic and research purposes.',
 		},
 		{
 			title: 'Computer Vision & Generative Models',
@@ -45,6 +46,6 @@ export const template = {
 
 export const seo = {
 	default_title: 'Ignacy Kolton',
-	default_description: 'Personal website of Ignacy Kolton, PhD student in Computer Science at Jagiellonian University.',
+	default_description: 'Personal website of Ignacy Kolton, PhD candidate in Technical Computer Science at Jagiellonian University.',
 	default_image: '/images/favicon.ico',
 }

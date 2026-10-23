@@ -8,6 +8,11 @@ export function highlightAuthor(authors: string): string{
 	return authors
 }
 
+export function linkGroup(text: string): string {
+	const { name, url } = profile.group
+	return text.replace(name, `<a href='${url}' target='_blank' rel='noopener noreferrer' class='text-accent underline dark:text-accent-dark'>${name}</a>`)
+}
+
 export function trimExcerpt(excerpt: string): string {
 	const excerptLength = template.excerptLength
 	return excerpt.length > excerptLength ? `${excerpt.substring(0, excerptLength)}...` : excerpt
