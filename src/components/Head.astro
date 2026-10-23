@@ -1,5 +1,6 @@
 ---
-import {template} from '@/settings'
+import {template, seo} from '@/settings'
+import { SOCIAL_CARD_WIDTH, SOCIAL_CARD_HEIGHT } from '@/lib/socialCard'
 interface Props {
 	title: string
 	description: string
@@ -42,6 +43,13 @@ const { title, description, image } = Astro.props
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
 <meta property='og:image' content={new URL(image, Astro.url)} />
+<meta property='og:image:alt' content={title} />
+{image === seo.default_image && (
+	<>
+		<meta property='og:image:width' content={String(SOCIAL_CARD_WIDTH)} />
+		<meta property='og:image:height' content={String(SOCIAL_CARD_HEIGHT)} />
+	</>
+)}
 
 <!-- Twitter -->
 <meta property='twitter:card' content='summary_large_image' />

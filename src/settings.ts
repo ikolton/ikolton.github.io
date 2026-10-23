@@ -48,5 +48,6 @@ export const template = {
 export const seo = {
 	default_title: 'Ignacy Kolton',
 	default_description: 'Personal website of Ignacy Kolton, PhD candidate in Technical Computer Science at Jagiellonian University.',
-	default_image: '/images/favicon.ico',
+	default_image: '/og-card.png', // Link-preview image, generated at build time by scripts/generate-social-card.ts
+	social_card_tagline: 'Machine learning for medical imaging · GMUM, Jagiellonian University',
 }
