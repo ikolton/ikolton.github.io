@@ -56,28 +56,24 @@ export const education = [
 
 export const skills = [
 	{
-		title: 'Medical Imaging',
-		description: '3D CT, MRI and ultrasound volumes, radiology report generation',
+		title: 'Programming',
+		description: 'Python, C++',
 	},
 	{
-		title: 'Vision-Language Models',
-		description: 'Medical VLMs, LLM decoders, LoRA fine-tuning, custom training objectives',
+		title: 'ML Frameworks',
+		description: 'PyTorch, NumPy, pandas',
 	},
 	{
-		title: 'Generative Models',
-		description: 'Diffusion models, concept unlearning, adversarial prompting and red-teaming',
+		title: 'Methods',
+		description: 'Vision-language model fine-tuning (LoRA), diffusion models, Gaussian Splatting, reinforcement learning',
 	},
 	{
-		title: '3D Vision',
-		description: 'Gaussian Splatting, surface reconstruction, frame interpolation',
+		title: 'Medical Data',
+		description: '3D CT, MRI and ultrasound volumes, radiology reports',
 	},
 	{
-		title: 'Reinforcement Learning',
-		description: 'Policy learning with verifiable rewards (RLVR)',
-	},
-	{
-		title: 'Engineering',
-		description: 'Python, PyTorch, NumPy, pandas, C++, Git, Docker, Linux',
+		title: 'Tools',
+		description: 'Git, Docker, Linux',
 	},
 	// {
 	// 	title: 'Experimental Techniques',

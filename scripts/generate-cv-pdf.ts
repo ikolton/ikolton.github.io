@@ -31,6 +31,7 @@ async function main() {
       authorName: profile.author_name,
       websiteUrl: website,
       contacts,
+      researchInterests: profile.research_interests,
       education,
       experiences,
       publications,
