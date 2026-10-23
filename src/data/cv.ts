@@ -49,32 +49,28 @@ export const education = [
 
 export const skills = [
 	{
-		title: 'Machine Learning & AI',
-		description: 'Machine Learning, LLMs, NLP, PyTorch, NumPy, pandas',
+		title: 'Medical Imaging',
+		description: '3D CT, MRI and ultrasound volumes, radiology report generation',
 	},
 	{
-		title: 'Programming Languages',
-		description: 'C++, Python, .NET, C#, Java, Shell, Assembler',
+		title: 'Vision-Language Models',
+		description: 'Medical VLMs, LLM decoders, LoRA fine-tuning, custom training objectives',
 	},
 	{
-		title: 'Software Engineering',
-		description: 'OOP, SOLID, Design Patterns, Unit Testing, PyTest, Google Test',
+		title: 'Generative Models',
+		description: 'Diffusion models, concept unlearning, adversarial prompting and red-teaming',
 	},
 	{
-		title: 'DevOps & Tools',
-		description: 'Git, GitLab, CI/CD, Docker, Jira, Agile',
+		title: '3D Vision',
+		description: 'Gaussian Splatting, surface reconstruction, frame interpolation',
 	},
 	{
-		title: 'Systems',
-		description: 'Linux, macOS, Windows',
+		title: 'Reinforcement Learning',
+		description: 'Policy learning with verifiable rewards (RLVR)',
 	},
 	{
-		title: 'Databases',
-		description: 'SQL',
-	},
-	{
-		title: 'Mathematics',
-		description: 'Statistics, Calculus, Linear Algebra',
+		title: 'Engineering',
+		description: 'Python, PyTorch, NumPy, pandas, C++, Git, Docker, Linux',
 	},
 	// {
 	// 	title: 'Experimental Techniques',

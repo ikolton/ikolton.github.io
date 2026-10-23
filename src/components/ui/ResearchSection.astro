@@ -1,20 +1,22 @@
 ---
 interface Props {
+	summary?: string
 	areas: { title: string; description: string }[]
 }
 
-const { areas } = Astro.props
+const { summary, areas } = Astro.props
 ---
 
 <section id="research" class="border-y border-neutral-200 bg-white py-20 dark:border-neutral-800 dark:bg-neutral-950">
-	<div class="mx-auto flex max-w-6xl flex-wrap gap-14 px-6">
-		<div class="max-w-sm flex-1">
+	<div class="mx-auto flex max-w-6xl flex-col gap-10 px-6 md:flex-row md:gap-14">
+		<div class="md:max-w-sm md:flex-1">
 			<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">Research</p>
 			<h2 class="mb-4 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">What I work on</h2>
-			<p class="text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
-				</p>
+			{summary && (
+				<p class="text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">{summary}</p>
+			)}
 		</div>
-		<div class="min-w-0 flex flex-[1.4] flex-col">
+		<div class="min-w-0 flex flex-col md:flex-[1.4]">
 			{areas.map((area, index) => (
 				<div class:list={["flex gap-6", index === 0 ? "pb-8" : "border-t border-neutral-200 pt-8 pb-8 dark:border-neutral-800"]}>
 					<span class="flex-none pt-0.5 font-mono text-sm text-accent dark:text-accent-dark">0{index + 1}</span>

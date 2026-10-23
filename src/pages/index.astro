@@ -11,13 +11,13 @@ import PublicationsSection from '@/components/ui/PublicationsSection.astro'
 import BackgroundSection from '@/components/ui/BackgroundSection.astro'
 import ContactSection from '@/components/ui/ContactSection.astro'
 
-const { fullName, title, secondaryTitle, institute, bio, research_areas } = profile
+const { fullName, title, secondaryTitle, institute, bio, research_summary, research_areas } = profile
 const orderedPublications = sortByDateDesc(publications)
 ---
 
 <Layout>
 	<Hero fullName={fullName} title={title} secondaryTitle={secondaryTitle} institute={institute} bio={bio} profilePicture={ProfilePictures} />
-	<ResearchSection areas={research_areas} />
+	<ResearchSection summary={research_summary} areas={research_areas} />
 	<PublicationsSection publications={orderedPublications} />
 	<BackgroundSection />
 	<ContactSection />
