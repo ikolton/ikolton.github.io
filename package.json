@@ -3,8 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "predev": "tsx scripts/generate-cv-pdf.ts",
     "dev": "astro dev",
-    "prebuild": "tsx scripts/fetch-publications.ts",
+    "prebuild": "tsx scripts/fetch-publications.ts && tsx scripts/generate-cv-pdf.ts",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -20,6 +21,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/pdfkit": "^0.17.6",
+    "pdfkit": "^0.20.2",
     "tsx": "^4.23.1",
     "typescript": "^5.9.3",
     "vitest": "^4.1.10"

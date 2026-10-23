@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { experiences, education, skills, awards } from "@/data/cv";
 import { publications } from "@/data/publications";
-import { profile } from "@/settings";
+import { profile, template } from "@/settings";
 import { sortByEndDateDesc, sortByDateDesc, highlightAuthor, linkGroup } from "@/lib/utils";
 import TimelineColumn from "@/components/ui/TimelineColumn.astro";
 import SkillsGrid from "@/components/ui/SkillsGrid.astro";
@@ -28,7 +28,12 @@ const orderedPublications = sortByDateDesc(publications);
 <Layout title="CV">
 	<div class="mx-auto max-w-4xl px-6 py-16">
 		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">CV</p>
-		<h1 class="mb-6 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{profile.fullName}</h1>
+		<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+			<h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{profile.fullName}</h1>
+			<a href={`${template.base}/cv.pdf`} download={`${profile.fullName.replace(/ /g, '_')}_CV.pdf`} class="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-900 no-underline dark:border-neutral-700 dark:text-neutral-50">
+				Download PDF
+			</a>
+		</div>
 		<p class="mb-16 max-w-2xl text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
 			<Fragment set:html={linkGroup(profile.bio)} />
 		</p>
@@ -58,8 +63,7 @@ const orderedPublications = sortByDateDesc(publications);
 										award.title
 									)}
 								</strong>
-								{" "}({award.time}) — {award.issuer}
-								{award.description && <>. {award.description}</>}
+								{" "}({award.time}) — {award.issuer}{award.description && <>. {award.description}</>}
 							</p>
 						</div>
 					))}
