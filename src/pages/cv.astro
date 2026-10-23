@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { experiences, education, skills, awards } from "@/data/cv";
 import { publications } from "@/data/publications";
 import { profile } from "@/settings";
-import { sortByEndDateDesc, sortByDateDesc, highlightAuthor } from "@/lib/utils";
+import { sortByEndDateDesc, sortByDateDesc, highlightAuthor, linkGroup } from "@/lib/utils";
 import TimelineColumn from "@/components/ui/TimelineColumn.astro";
 import SkillsGrid from "@/components/ui/SkillsGrid.astro";
 
@@ -30,7 +30,7 @@ const orderedPublications = sortByDateDesc(publications);
 		<p class="mb-3 font-mono text-xs uppercase tracking-widest text-accent dark:text-accent-dark">CV</p>
 		<h1 class="mb-6 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{profile.fullName}</h1>
 		<p class="mb-16 max-w-2xl text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400">
-			{profile.bio}
+			<Fragment set:html={linkGroup(profile.bio)} />
 		</p>
 
 		{(educationItems.length > 0 || experienceItems.length > 0) && (
