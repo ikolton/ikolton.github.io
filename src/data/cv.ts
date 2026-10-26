@@ -65,7 +65,7 @@ export const skills = [
 	},
 	{
 		title: 'Methods',
-		description: 'Vision-language model fine-tuning (LoRA), diffusion models, Gaussian Splatting, reinforcement learning',
+		description: 'Vision-language models, LoRA fine-tuning, diffusion models, Gaussian Splatting, reinforcement learning',
 	},
 	{
 		title: 'Medical Data',
