@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { experiences, education, skills, awards } from "@/data/cv";
+import { experiences, education, skills, awards, presentations } from "@/data/cv";
 import { publications } from "@/data/publications";
 import { profile, template } from "@/settings";
 import { sortByEndDateDesc, sortByDateDesc, highlightAuthor, linkGroup } from "@/lib/utils";
@@ -23,6 +23,7 @@ const experienceItems = sortByEndDateDesc(experiences).map((item) => ({
 
 const orderedAwards = sortByDateDesc(awards);
 const orderedPublications = sortByDateDesc(publications);
+const orderedPresentations = sortByDateDesc(presentations);
 ---
 
 <Layout title="CV">
@@ -93,6 +94,30 @@ const orderedPublications = sortByDateDesc(publications);
 								<span set:html={highlightAuthor(pub.authors)} />
 							</p>
 							<p class="font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">{pub.journal} · {pub.time}</p>
+						</article>
+					))}
+				</div>
+			</section>
+		)}
+
+		{orderedPresentations.length > 0 && (
+			<section class="mt-16">
+				<p class="mb-5 text-[13px] font-semibold text-neutral-500 dark:text-neutral-500">Presentations</p>
+				<div class="flex flex-col gap-5">
+					{orderedPresentations.map((item) => (
+						<article class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40">
+							<h3 class="mb-2 text-base font-bold leading-snug">
+								{item.link ? (
+									<a href={item.link} target="_blank" rel="noopener noreferrer" class="text-neutral-900 no-underline dark:text-neutral-50">
+										{item.title}
+									</a>
+								) : (
+									<span class="text-neutral-900 dark:text-neutral-50">{item.title}</span>
+								)}
+							</h3>
+							<p class="font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">
+								{item.type} · {item.location ? `${item.event}, ${item.location}` : item.event} · {item.time}
+							</p>
 						</article>
 					))}
 				</div>
