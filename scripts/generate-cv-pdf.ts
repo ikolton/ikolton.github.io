@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { profile, social, template } from "../src/settings";
-import { awards, education, experiences, skills } from "../src/data/cv";
+import { awards, education, experiences, presentations, skills } from "../src/data/cv";
 import { publications } from "../src/data/publications";
 import { renderCvPdf } from "../src/lib/cvPdf";
 
@@ -35,6 +35,7 @@ async function main() {
       education,
       experiences,
       publications,
+      presentations,
       awards,
       skills,
       updated: new Date(),

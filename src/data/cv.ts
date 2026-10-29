@@ -81,6 +81,18 @@ export const skills = [
 	// },
 ];
 
+export const presentations = [
+	{
+		type: 'Poster',
+		title: 'Beyond Fluent Reports: Faithful Radiology Report Generation',
+		event: 'ML in PL Conference 2026',
+		location: 'Warsaw, Poland',
+		time: 'October 2026',
+		link: 'https://conference.mlinpl.org/2026/program',
+		paper: 'https://arxiv.org/abs/2610.30980',
+	},
+];
+
 export const awards = [
 	{
 		title: 'ArtInCom Minigrant',

@@ -1,6 +1,7 @@
 ---
 import type { Publication } from '@/types/cv'
 import { highlightAuthor, trimExcerpt } from '@/lib/utils'
+import { presentations } from '@/data/cv'
 
 interface Props {
 	publications: Publication[]
@@ -9,6 +10,10 @@ interface Props {
 
 const { publications, initialCount = 2 } = Astro.props
 const hiddenCount = Math.max(publications.length - initialCount, 0)
+
+// Venues where a paper was presented, shown under its arXiv line
+const presentedAt = (link?: string) =>
+	presentations.filter((item) => link && item.paper === link).map((item) => `${item.type} at ${item.event}`)
 ---
 
 <section id="publications" class="bg-neutral-50 py-20 dark:bg-neutral-900/40">
@@ -29,7 +34,12 @@ const hiddenCount = Math.max(publications.length - initialCount, 0)
 					<p class="mb-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
 						<span set:html={highlightAuthor(pub.authors)} />
 					</p>
-					<p class="mb-3 font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">{pub.journal} · {pub.time}</p>
+					<p class="mb-3 font-mono text-[11.5px] text-neutral-500 dark:text-neutral-500">
+						{pub.journal} · {pub.time}
+						{presentedAt(pub.link).map((label) => (
+							<span class="text-accent dark:text-accent-dark"> · {label}</span>
+						))}
+					</p>
 					<p class="text-[14.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">{pub.abstract && trimExcerpt(pub.abstract)}</p>
 					<div class="mt-3.5 flex flex-wrap gap-2.5">
 						{pub.repo && (

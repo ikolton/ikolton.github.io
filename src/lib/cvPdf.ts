@@ -1,6 +1,6 @@
 import path from 'node:path'
 import PDFDocument from 'pdfkit'
-import type { Publication } from '@/types/cv'
+import type { Presentation, Publication } from '@/types/cv'
 import { sortByDateDesc, sortByEndDateDesc } from '@/lib/utils'
 
 // Renders a plain, single-column research CV from the same data the site
@@ -16,6 +16,7 @@ export interface CvPdfData {
 	education: { degree: string; school: string; location?: string; time: string; description?: string }[]
 	experiences: { title: string; company: string; location?: string; time: string; description?: string }[]
 	publications: Publication[]
+	presentations?: Presentation[]
 	awards: { title: string; issuer: string; time: string; description?: string; link?: string }[]
 	skills: { title: string; description: string }[]
 	updated: Date
@@ -133,6 +134,15 @@ export function renderCvPdf(data: CvPdfData, fontDir: string): Promise<Buffer> {
 				doc.text(hostOf(url), { link: url, continued: !last })
 				if (!last) doc.text('  ·  ', { link: null, continued: true })
 			})
+		})
+	}
+
+	if (data.presentations && data.presentations.length > 0) {
+		section('Presentations')
+		sortByDateDesc(data.presentations).forEach((item, index) => {
+			if (index > 0) doc.moveDown(0.6)
+			entryHeading(item.title, item.time)
+			muted(`${item.type} · ${item.location ? `${item.event}, ${item.location}` : item.event}`)
 		})
 	}
 

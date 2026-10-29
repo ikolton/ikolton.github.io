@@ -29,6 +29,17 @@ export interface Publication {
   abstract?: string;
 }
 
+export interface Presentation {
+  type: string;
+  title: string;
+  event: string;
+  location?: string;
+  time: string;
+  link?: string;
+  // Link of the publication this presents, so its card can show the venue
+  paper?: string;
+}
+
 export interface Award {
   title: string;
   issuer: string;
