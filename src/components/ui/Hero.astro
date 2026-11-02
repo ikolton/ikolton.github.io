@@ -12,6 +12,7 @@ const socialLinks = [
 	social.linkedin && { label: 'LinkedIn', href: social.linkedin },
 	social.github && { label: 'GitHub', href: social.github },
 	social.scholar && { label: 'Scholar', href: social.scholar },
+	{ label: 'CV', href: `${template.base}/cv` },
 ].filter(Boolean) as { label: string; href: string }[]
 ---
 
@@ -40,8 +41,8 @@ const socialLinks = [
 			{socialLinks.map((link) => (
 				<a
 					href={link.href}
-					target={link.href.startsWith('mailto:') ? undefined : '_blank'}
-					rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+					target={link.href.startsWith('http') ? '_blank' : undefined}
+					rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
 					class="rounded-full border border-neutral-300 px-3.5 py-1.5 font-mono text-xs text-neutral-600 no-underline transition-colors hover:border-accent hover:text-accent dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-accent-dark dark:hover:text-accent-dark"
 				>
 					{link.label}

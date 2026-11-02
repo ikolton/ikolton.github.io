@@ -8,7 +8,6 @@ import ProfilePictures from '@/assets/profile_pictures.jpg'
 import Hero from '@/components/ui/Hero.astro'
 import ResearchSection from '@/components/ui/ResearchSection.astro'
 import PublicationsSection from '@/components/ui/PublicationsSection.astro'
-import BackgroundSection from '@/components/ui/BackgroundSection.astro'
 import ContactSection from '@/components/ui/ContactSection.astro'
 
 const { fullName, title, secondaryTitle, institute, bio, research_summary, research_areas } = profile
@@ -19,6 +18,5 @@ const orderedPublications = sortByDateDesc(publications)
 	<Hero fullName={fullName} title={title} secondaryTitle={secondaryTitle} institute={institute} bio={bio} profilePicture={ProfilePictures} />
 	<ResearchSection summary={research_summary} areas={research_areas} />
 	<PublicationsSection publications={orderedPublications} />
-	<BackgroundSection />
 	<ContactSection />
 </Layout>
