@@ -40,9 +40,7 @@ export const template = {
 	menu_left: false,
 	transitions: true,
 	excerptLength: 200,
-	postPerPage: 5,
     base: '', // Repository name starting with /
-    enableBlog: false, // Flip to true once src/content/BlogPosts has posts
 }
 
 export const seo = {
