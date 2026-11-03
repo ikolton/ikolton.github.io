@@ -1,6 +1,7 @@
 ---
 import type { Publication } from '@/types/cv'
 import { highlightAuthor, trimExcerpt } from '@/lib/utils'
+import { toBibtex } from '@/lib/bibtex'
 import { presentations } from '@/data/cv'
 
 interface Props {
@@ -50,7 +51,11 @@ const presentedAt = (link?: string) =>
 						<a href={pub.link} target="_blank" rel="noopener noreferrer" class="rounded-lg border border-neutral-200 px-3.5 py-1.5 text-xs font-medium text-neutral-700 no-underline dark:border-neutral-800 dark:text-neutral-300">
 							Read paper
 						</a>
+						<button type="button" class="bibtex-toggle rounded-lg border border-neutral-200 px-3.5 py-1.5 text-xs font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300" aria-expanded="false">
+							BibTeX
+						</button>
 					</div>
+					<pre class="bibtex hidden mt-3.5 overflow-x-auto rounded-lg border border-neutral-200 bg-neutral-50 p-4 font-mono text-[11.5px] leading-relaxed text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">{toBibtex(pub)}</pre>
 				</article>
 			))}
 		</div>
@@ -73,12 +78,33 @@ const presentedAt = (link?: string) =>
 	(function () {
 		function bind() {
 			const btn = document.getElementById('publications-toggle');
-			if (!btn) return;
-			btn.addEventListener('click', () => {
-				const extras = document.querySelectorAll('.pub-extra');
-				const isCurrentlyHidden = extras[0]?.classList.contains('hidden');
-				extras.forEach((el) => el.classList.toggle('hidden', !isCurrentlyHidden));
-				btn.textContent = isCurrentlyHidden ? btn.dataset.hideLabel : btn.dataset.showLabel;
+			if (btn) {
+				btn.addEventListener('click', () => {
+					const extras = document.querySelectorAll('.pub-extra');
+					const isCurrentlyHidden = extras[0]?.classList.contains('hidden');
+					extras.forEach((el) => el.classList.toggle('hidden', !isCurrentlyHidden));
+					btn.textContent = isCurrentlyHidden ? btn.dataset.hideLabel : btn.dataset.showLabel;
+				});
+			}
+
+			// Opening a BibTeX block also copies it; the visible text is the
+			// fallback when the clipboard is unavailable.
+			document.querySelectorAll('.bibtex-toggle').forEach((toggle) => {
+				toggle.addEventListener('click', async () => {
+					const block = toggle.closest('article')?.querySelector('.bibtex');
+					if (!block) return;
+					const opening = block.classList.contains('hidden');
+					block.classList.toggle('hidden', !opening);
+					toggle.setAttribute('aria-expanded', String(opening));
+					if (!opening) return;
+					try {
+						await navigator.clipboard.writeText(block.textContent);
+						toggle.textContent = 'Copied ✓';
+						setTimeout(() => { toggle.textContent = 'BibTeX'; }, 2000);
+					} catch {
+						// Clipboard blocked: the expanded block can be copied by hand.
+					}
+				});
 			});
 		}
 		bind();
